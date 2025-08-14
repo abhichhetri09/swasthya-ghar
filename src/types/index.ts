@@ -233,7 +233,7 @@ export const hasPermission = (role: UserRole, permission: keyof RolePermissions)
 // THEME & LANGUAGE TYPES
 // ============================================================================
 
-export type Language = 'en' | 'fi';
+export type Language = 'en' | 'fi' | 'ne';
 
 export interface ThemeContextType {
   isDark: boolean;

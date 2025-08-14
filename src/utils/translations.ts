@@ -1,5 +1,6 @@
 import en from '../locales/en.json';
 import fi from '../locales/fi.json';
+import ne from '../locales/ne.json';
 import type { Language } from '../types';
 
 let currentLanguage: Language = 'en';
@@ -7,6 +8,7 @@ let currentLanguage: Language = 'en';
 const translations = {
   en,
   fi,
+  ne,
 };
 
 // Helper function to get nested object properties
