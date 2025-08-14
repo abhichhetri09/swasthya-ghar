@@ -9,6 +9,8 @@ import { RoleSelector } from '../components/RoleSelector';
 import { PermissionGate } from '../components/PermissionGate';
 import { useTranslation } from '../hooks/useTranslation';
 import { getRoleConfig, UserRole } from '../types';
+import { Icon } from '../components/Icon';
+import { IconName } from '../constants/icons';
 
 
 
@@ -38,9 +40,9 @@ export const HomeScreen: React.FC = () => {
           <Text className={`text-xl font-semibold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             {t('currentStatus')}
           </Text>
-          <View className="flex-row items-center mb-2">
-            <Text className="text-3xl mr-3">{roleConfig.icon}</Text>
-            <View className="flex-1">
+                     <View className="flex-row items-center mb-2">
+             <Icon name={roleConfig.icon as IconName} size={32} className="mr-3" />
+             <View className="flex-1">
               <Text className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 {user ? user.name : t('notLoggedIn')}
               </Text>
@@ -65,9 +67,12 @@ export const HomeScreen: React.FC = () => {
 
           <PermissionGate permission="canViewAnalytics">
             <View className={`p-6 rounded-3xl mb-6 ${isDark ? 'bg-primary-900/20' : 'bg-primary-50'} shadow-lg`}>
-              <Text className={`text-xl font-semibold mb-4 ${isDark ? 'text-primary-300' : 'text-primary-700'}`}>
-                📊 {t('analytics')} {t('dashboard')}
-              </Text>
+              <View className="flex-row items-center mb-4">
+                <Icon name="analytics" size={24} className="mr-2" />
+                <Text className={`text-xl font-semibold ${isDark ? 'text-primary-300' : 'text-primary-700'}`}>
+                  {t('analytics')}
+                </Text>
+              </View>
               <Text className={`${isDark ? 'text-primary-200' : 'text-primary-600'}`}>
                 {t('featureDescriptions.analytics')}
               </Text>
@@ -76,9 +81,12 @@ export const HomeScreen: React.FC = () => {
 
           <PermissionGate permission="canManageUsers">
             <View className={`p-6 rounded-3xl mb-6 ${isDark ? 'bg-error-900/20' : 'bg-error-50'} shadow-lg`}>
-              <Text className={`text-xl font-semibold mb-4 ${isDark ? 'text-error-300' : 'text-error-700'}`}>
-                👥 {t('userManagement')}
-              </Text>
+              <View className="flex-row items-center mb-4">
+                <Icon name="userManagement" size={24} className="mr-2" />
+                <Text className={`text-xl font-semibold ${isDark ? 'text-error-300' : 'text-error-700'}`}>
+                  {t('userManagement')}
+                </Text>
+              </View>
               <Text className={`${isDark ? 'text-error-200' : 'text-error-600'}`}>
                 {t('featureDescriptions.userManagement')}
               </Text>
@@ -87,9 +95,12 @@ export const HomeScreen: React.FC = () => {
 
           <PermissionGate permission="canAccessPatientData">
             <View className={`p-6 rounded-3xl mb-6 ${isDark ? 'bg-secondary-900/20' : 'bg-secondary-50'} shadow-lg`}>
-              <Text className={`text-xl font-semibold mb-4 ${isDark ? 'text-secondary-300' : 'text-secondary-700'}`}>
-                🏥 {t('patientData')}
-              </Text>
+              <View className="flex-row items-center mb-4">
+                <Icon name="patientData" size={24} className="mr-2" />
+                <Text className={`text-xl font-semibold ${isDark ? 'text-secondary-300' : 'text-secondary-700'}`}>
+                  {t('patientData')}
+                </Text>
+              </View>
               <Text className={`${isDark ? 'text-secondary-200' : 'text-secondary-600'}`}>
                 {t('featureDescriptions.patientData')}
               </Text>
@@ -98,9 +109,12 @@ export const HomeScreen: React.FC = () => {
 
           <PermissionGate permission="canManageSystem">
             <View className={`p-6 rounded-3xl mb-6 ${isDark ? 'bg-role-user/20' : 'bg-role-user/10'} shadow-lg`}>
-              <Text className={`text-xl font-semibold mb-4 ${isDark ? 'text-role-user/80' : 'text-role-user'}`}>
-                ⚙️ {t('systemSettings')}
-              </Text>
+              <View className="flex-row items-center mb-4">
+                <Icon name="systemSettings" size={24} className="mr-2" />
+                <Text className={`text-xl font-semibold ${isDark ? 'text-role-user/80' : 'text-role-user'}`}>
+                  {t('systemSettings')}
+                </Text>
+              </View>
               <Text className={`${isDark ? 'text-role-user/60' : 'text-role-user/80'}`}>
                 {t('featureDescriptions.systemSettings')}
               </Text>
@@ -138,9 +152,12 @@ export const HomeScreen: React.FC = () => {
 
         {/* Info Card */}
         <View className={`p-6 rounded-3xl mt-6 ${isDark ? 'bg-primary-900/20' : 'bg-primary-50'}`}>
-          <Text className={`text-center ${isDark ? 'text-primary-300' : 'text-primary-700'}`}>
-            ✨ {t('settings.info')}
-          </Text>
+          <View className="flex-row items-center justify-center">
+            <Icon name="info" size={20} className="mr-2" />
+            <Text className={`text-center ${isDark ? 'text-primary-300' : 'text-primary-700'}`}>
+              {t('settings.info')}
+            </Text>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

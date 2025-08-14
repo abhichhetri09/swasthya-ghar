@@ -3,15 +3,17 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
-import { useNavigation } from '../hooks/useNavigation';
+import { navigationService } from '../services/navigation';
 import { PermissionGate } from '../components/PermissionGate';
 import { useTranslation } from '../hooks/useTranslation';
+import { Icon } from '../components/Icon';
+import { IconName } from '../constants/icons';
+import type { RolePermissions } from '../types';
 
 export const DashboardScreen: React.FC = () => {
   const { isDark } = useTheme();
   const { user, currentRole } = useUser();
   const { t } = useTranslation();
-  const navigation = useNavigation();
 
   const DashboardCard = ({
     title,
@@ -23,31 +25,54 @@ export const DashboardScreen: React.FC = () => {
   }: {
     title: string;
     subtitle: string;
-    icon: string;
+    icon: IconName;
     onPress: () => void;
-    permission?: string;
+    permission?: keyof RolePermissions;
     color?: 'primary' | 'secondary' | 'error' | 'warning' | 'success';
   }) => (
-    <PermissionGate permission={permission as any} fallback={null}>
-      <TouchableOpacity
-        onPress={onPress}
-        className={`p-4 rounded-2xl mb-4 ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg`}
-        activeOpacity={0.8}
-      >
-        <View className="flex-row items-center">
-          <Text className="text-3xl mr-4">{icon}</Text>
-          <View className="flex-1">
-            <Text className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              {title}
-            </Text>
-            <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              {subtitle}
-            </Text>
+    <>
+      {permission ? (
+        <PermissionGate permission={permission} fallback={null}>
+          <TouchableOpacity
+            onPress={onPress}
+            className={`p-4 rounded-2xl mb-4 ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg`}
+            activeOpacity={0.8}
+          >
+            <View className="flex-row items-center">
+              <Icon name={icon} size={32} className="mr-4" />
+              <View className="flex-1">
+                <Text className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  {title}
+                </Text>
+                <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  {subtitle}
+                </Text>
+              </View>
+              <Text className={`text-2xl ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>→</Text>
+            </View>
+          </TouchableOpacity>
+        </PermissionGate>
+      ) : (
+        <TouchableOpacity
+          onPress={onPress}
+          className={`p-4 rounded-2xl mb-4 ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg`}
+          activeOpacity={0.8}
+        >
+          <View className="flex-row items-center">
+            <Icon name={icon} size={32} className="mr-4" />
+            <View className="flex-1">
+              <Text className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                {title}
+              </Text>
+              <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                {subtitle}
+              </Text>
+            </View>
+            <Text className={`text-2xl ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>→</Text>
           </View>
-          <Text className={`text-2xl ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>→</Text>
-        </View>
-      </TouchableOpacity>
-    </PermissionGate>
+        </TouchableOpacity>
+      )}
+    </>
   );
 
   return (
@@ -72,8 +97,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('analytics')}
             subtitle={t('analyticsSubtitle')}
-            icon="📊"
-            onPress={navigation.goToAnalytics}
+            icon="analytics"
+            onPress={() => navigationService.navigate('Analytics')}
             permission="canViewAnalytics"
             color="primary"
           />
@@ -81,8 +106,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('userManagement')}
             subtitle={t('userManagementSubtitle')}
-            icon="👥"
-            onPress={navigation.goToUserManagement}
+            icon="userManagement"
+            onPress={() => navigationService.navigate('UserManagement')}
             permission="canManageUsers"
             color="error"
           />
@@ -90,8 +115,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('patientData')}
             subtitle={t('patientDataSubtitle')}
-            icon="🏥"
-            onPress={navigation.goToPatientData}
+            icon="patientData"
+            onPress={() => navigationService.navigate('PatientData')}
             permission="canAccessPatientData"
             color="secondary"
           />
@@ -99,8 +124,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('systemSettings')}
             subtitle={t('systemSettingsSubtitle')}
-            icon="⚙️"
-            onPress={navigation.goToSystemSettings}
+            icon="systemSettings"
+            onPress={() => navigationService.navigate('SystemSettings')}
             permission="canManageSystem"
             color="warning"
           />
@@ -108,8 +133,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('notifications')}
             subtitle={t('notificationsSubtitle')}
-            icon="🔔"
-            onPress={navigation.goToNotifications}
+            icon="notifications"
+            onPress={() => navigationService.navigate('Notifications')}
             permission="canViewNotifications"
             color="success"
           />
@@ -117,8 +142,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('reports')}
             subtitle={t('reportsSubtitle')}
-            icon="📋"
-            onPress={navigation.goToReports}
+            icon="reports"
+            onPress={() => navigationService.navigate('Reports')}
             permission="canViewReports"
             color="primary"
           />
@@ -126,8 +151,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('billing')}
             subtitle={t('billingSubtitle')}
-            icon="💰"
-            onPress={navigation.goToBilling}
+            icon="billing"
+            onPress={() => navigationService.navigate('Billing')}
             permission="canManageBilling"
             color="success"
           />
@@ -135,8 +160,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('logs')}
             subtitle={t('logsSubtitle')}
-            icon="📝"
-            onPress={navigation.goToLogs}
+            icon="logs"
+            onPress={() => navigationService.navigate('Logs')}
             permission="canViewLogs"
             color="warning"
           />
@@ -144,8 +169,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('contentManagement')}
             subtitle={t('contentManagementSubtitle')}
-            icon="📚"
-            onPress={navigation.goToContentManagement}
+            icon="contentManagement"
+            onPress={() => navigationService.navigate('ContentManagement')}
             permission="canManageContent"
             color="secondary"
           />
@@ -160,8 +185,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('appointments')}
             subtitle={t('appointmentsSubtitle')}
-            icon="📅"
-            onPress={navigation.goToAppointments}
+            icon="appointments"
+            onPress={() => navigationService.navigate('Appointments')}
             permission="canManageAppointments"
             color="primary"
           />
@@ -169,8 +194,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('healthRecords')}
             subtitle={t('healthRecordsSubtitle')}
-            icon="📋"
-            onPress={navigation.goToHealthRecords}
+            icon="healthRecords"
+            onPress={() => navigationService.navigate('HealthRecords')}
             permission="canAccessHealthRecords"
             color="secondary"
           />
@@ -178,8 +203,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('medications')}
             subtitle={t('medicationsSubtitle')}
-            icon="💊"
-            onPress={navigation.goToMedications}
+            icon="medications"
+                  onPress={() => navigationService.navigate('Medications')}
             permission="canManageMedications"
             color="warning"
           />
@@ -187,8 +212,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('labResults')}
             subtitle={t('labResultsSubtitle')}
-            icon="🔬"
-            onPress={navigation.goToLabResults}
+            icon="labResults"
+            onPress={() => navigationService.navigate('LabResults')}
             permission="canViewLabResults"
             color="success"
           />
@@ -196,8 +221,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('prescriptions')}
             subtitle={t('prescriptionsSubtitle')}
-            icon="📄"
-            onPress={navigation.goToPrescriptions}
+            icon="prescriptions"
+            onPress={() => navigationService.navigate('Prescriptions')}
             permission="canManagePrescriptions"
             color="primary"
           />
@@ -205,8 +230,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('telemedicine')}
             subtitle={t('telemedicineSubtitle')}
-            icon="📹"
-            onPress={navigation.goToTelemedicine}
+            icon="telemedicine"
+            onPress={() => navigationService.navigate('Telemedicine')}
             permission="canAccessTelemedicine"
             color="secondary"
           />
@@ -214,8 +239,8 @@ export const DashboardScreen: React.FC = () => {
           <DashboardCard
             title={t('emergencyContacts')}
             subtitle={t('emergencyContactsSubtitle')}
-            icon="🚨"
-            onPress={navigation.goToEmergencyContacts}
+            icon="emergencyContacts"
+            onPress={() => navigationService.navigate('EmergencyContacts')}
             permission="canManageEmergencyContacts"
             color="error"
           />

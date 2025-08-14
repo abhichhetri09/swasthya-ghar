@@ -160,7 +160,7 @@ export const getColor = (palette: ColorPalette, shade?: ColorShade): string => {
   if (shade) {
     return Colors[palette][shade as keyof typeof Colors[typeof palette]];
   }
-  return Colors[palette] as string;
+  return Colors[palette] as unknown as string;
 };
 
 export const getRoleColor = (role: RoleColor): string => {
@@ -172,5 +172,8 @@ export const getTextColor = (isDark: boolean, variant: 'primary' | 'secondary' |
 };
 
 export const getBackgroundColor = (isDark: boolean, variant: 'primary' | 'secondary' = 'primary'): string => {
-  return Colors.background[isDark ? 'dark' : 'light' + (variant === 'secondary' ? 'Secondary' : '')];
+  const key = isDark 
+    ? (variant === 'secondary' ? 'darkSecondary' : 'dark')
+    : (variant === 'secondary' ? 'lightSecondary' : 'light');
+  return Colors.background[key];
 };

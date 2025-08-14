@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
 import { useTranslation } from '../hooks/useTranslation';
-import type { TabParamList, TabBarIconProps } from '../types';
+import type { TabParamList } from '../types';
 import { TABS } from '../types';
+import { Icon } from '../components/Icon';
+import { IconName } from '../constants/icons';
 
 // Import screens
 import { HomeScreen } from '../screens/HomeScreen';
@@ -16,26 +17,34 @@ import { SettingsScreen } from '../screens/SettingsScreen';
 const Tab = createBottomTabNavigator<TabParamList>();
 
 // Custom tab bar icon component
-const TabBarIcon: React.FC<TabBarIconProps> = ({ 
+const TabBarIcon: React.FC<{ 
+  name: string; 
+  focused: boolean; 
+  color: string; 
+  size?: number; 
+}> = ({ 
   name, 
   focused, 
   color, 
   size = 24 
 }) => {
-  const icons: Record<string, string> = {
-    home: '🏠',
-    dashboard: '📊',
-    profile: '👤',
-    settings: '⚙️',
+  // Map route names to icon names
+  const iconMap: Record<string, string> = {
+    home: 'home',
+    dashboard: 'dashboard',
+    profile: 'profile',
+    settings: 'settings',
   };
 
+  const iconName = iconMap[name] || 'home';
+  
   return (
-    <Text style={{ 
-      fontSize: focused ? size + 4 : size, 
-      color, 
-    }}>
-      {icons[name] || '📱'}
-    </Text>
+    <Icon 
+      name={iconName as IconName}
+      size={size}
+      color={color}
+      focused={focused}
+    />
   );
 };
 

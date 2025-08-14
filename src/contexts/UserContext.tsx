@@ -18,8 +18,20 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const savedUser = await AsyncStorage.getItem('user');
       if (savedUser) {
         const parsedUser = JSON.parse(savedUser);
-        setUser(parsedUser);
-        setCurrentRole(parsedUser.role);
+        
+        // Check if the user's role still exists in the current configuration
+        const validRoles = ['admin', 'doctor', 'nurse', 'user'] as const;
+        if (!validRoles.includes(parsedUser.role)) {
+          console.warn(`User role '${parsedUser.role}' no longer exists, resetting to 'user'`);
+          // Reset to default user role
+          const resetUser = { ...parsedUser, role: 'user' as const };
+          await AsyncStorage.setItem('user', JSON.stringify(resetUser));
+          setUser(resetUser);
+          setCurrentRole('user');
+        } else {
+          setUser(parsedUser);
+          setCurrentRole(parsedUser.role);
+        }
       }
     } catch (error) {
       console.error('Error loading user:', error);

@@ -32,7 +32,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('analytics')}
-        icon="📊"
+        icon="analytics"
         description={t('featureDescriptions.analytics')}
       />
     );
@@ -44,7 +44,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('reports')}
-        icon="📋"
+        icon="reports"
         description={t('featureDescriptions.reports')}
       />
     );
@@ -56,7 +56,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('userManagement')}
-        icon="👥"
+        icon="userManagement"
         description={t('featureDescriptions.userManagement')}
       />
     );
@@ -68,7 +68,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('patientData')}
-        icon="🏥"
+        icon="patientData"
         description={t('featureDescriptions.patientData')}
       />
     );
@@ -80,7 +80,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('systemSettings')}
-        icon="⚙️"
+        icon="systemSettings"
         description={t('featureDescriptions.systemSettings')}
       />
     );
@@ -92,7 +92,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('logs')}
-        icon="📝"
+        icon="logs"
         description={t('featureDescriptions.logs')}
       />
     );
@@ -104,7 +104,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('notifications')}
-        icon="🔔"
+        icon="notifications"
         description={t('featureDescriptions.notifications')}
       />
     );
@@ -116,7 +116,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('contentManagement')}
-        icon="📚"
+        icon="contentManagement"
         description={t('featureDescriptions.contentManagement')}
       />
     );
@@ -128,7 +128,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('billing')}
-        icon="💰"
+        icon="billing"
         description={t('featureDescriptions.billing')}
       />
     );
@@ -140,7 +140,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('appointments')}
-        icon="📅"
+        icon="appointments"
         description={t('featureDescriptions.appointments')}
       />
     );
@@ -152,7 +152,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('healthRecords')}
-        icon="📋"
+        icon="healthRecords"
         description={t('featureDescriptions.healthRecords')}
       />
     );
@@ -164,7 +164,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('medications')}
-        icon="💊"
+        icon="medications"
         description={t('featureDescriptions.medications')}
       />
     );
@@ -176,7 +176,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('labResults')}
-        icon="🔬"
+        icon="labResults"
         description={t('featureDescriptions.labResults')}
       />
     );
@@ -188,7 +188,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('prescriptions')}
-        icon="📄"
+        icon="prescriptions"
         description={t('featureDescriptions.prescriptions')}
       />
     );
@@ -200,7 +200,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('telemedicine')}
-        icon="📹"
+        icon="telemedicine"
         description={t('featureDescriptions.telemedicine')}
       />
     );
@@ -212,7 +212,7 @@ export const AppNavigator: React.FC = () => {
     return (
       <PlaceholderScreen 
         title={t('emergencyContacts')}
-        icon="🚨"
+            icon="emergencyContacts"
         description={t('featureDescriptions.emergencyContacts')}
       />
     );

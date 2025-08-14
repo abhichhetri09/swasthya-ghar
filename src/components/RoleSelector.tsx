@@ -4,6 +4,8 @@ import { useUser } from '../contexts/UserContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { getAllRoles, getRoleConfig, UserRole } from '../types';
 import { useTranslation } from '../hooks/useTranslation';
+import { Icon } from './Icon';
+import { IconName } from '../constants/icons';
 
 export const RoleSelector: React.FC = () => {
   const { user, login, logout } = useUser();
@@ -83,7 +85,7 @@ export const RoleSelector: React.FC = () => {
               )}
 
               <View className="flex-row items-center relative z-10">
-                <Text className="text-2xl mr-3">{roleConfig.icon}</Text>
+                <Icon name={roleConfig.icon as IconName} size={24} className="mr-3" />
                 <View className="flex-1">
                   <Text className={`font-semibold text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}>
                     {roleConfig.displayName}

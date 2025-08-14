@@ -5,6 +5,8 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useNavigation } from '../hooks/useNavigation';
 import { useTranslation } from '../hooks/useTranslation';
 import type { PlaceholderScreenProps } from '../types';
+import { Icon } from './Icon';
+import { IconName } from '../constants/icons';
 
 export const PlaceholderScreen: React.FC<PlaceholderScreenProps> = ({
   title,
@@ -24,7 +26,7 @@ export const PlaceholderScreen: React.FC<PlaceholderScreenProps> = ({
     <SafeAreaView className={`flex-1 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
       <View className="flex-1 justify-center items-center px-6">
         {/* Icon */}
-        <Text className="text-8xl mb-6">{icon}</Text>
+        <Icon name={icon as IconName} size={80} className="mb-6" />
 
         {/* Title */}
         <Text className={`text-3xl font-bold text-center mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>

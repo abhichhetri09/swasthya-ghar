@@ -66,7 +66,7 @@ export const TABS = {
 // USER & ROLE TYPES
 // ============================================================================
 
-export type UserRole = 'admin' | 'doctor' | 'nurse' | 'patient' | 'user';
+export type UserRole = 'admin' | 'doctor' | 'nurse' | 'user' ;
 
 export interface User {
   id: string;
@@ -80,7 +80,7 @@ export interface RoleConfig {
   role: UserRole;
   displayName: string;
   description: string;
-  icon: string;
+  icon: string; // Icon name from the centralized icon system
   color: string;
   permissions: RolePermissions;
 }
@@ -110,7 +110,7 @@ export const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
     role: 'admin',
     displayName: 'Administrator',
     description: 'Full system access and management capabilities',
-    icon: '👑',
+    icon: 'admin',
     color: '#ef4444',
     permissions: {
       canViewAnalytics: true,
@@ -135,7 +135,7 @@ export const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
     role: 'doctor',
     displayName: 'Doctor',
     description: 'Medical professional with patient care access',
-    icon: '👨‍⚕️',
+    icon: 'doctor',
     color: '#3b82f6',
     permissions: {
       canViewAnalytics: true,
@@ -160,7 +160,7 @@ export const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
     role: 'nurse',
     displayName: 'Nurse',
     description: 'Healthcare provider with patient support access',
-    icon: '👩‍⚕️',
+    icon: 'nurse',
     color: '#10b981',
     permissions: {
       canViewAnalytics: false,
@@ -181,39 +181,16 @@ export const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
       canManageEmergencyContacts: true,
     },
   },
-  patient: {
-    role: 'patient',
-    displayName: 'Patient',
-    description: 'Individual receiving healthcare services',
-    icon: '🏥',
-    color: '#8b5cf6',
-    permissions: {
-      canViewAnalytics: false,
-      canManageUsers: false,
-      canAccessPatientData: false,
-      canManageSystem: false,
-      canViewNotifications: true,
-      canViewReports: false,
-      canManageBilling: false,
-      canViewLogs: false,
-      canManageContent: false,
-      canManageAppointments: false,
-      canAccessHealthRecords: true,
-      canManageMedications: false,
-      canViewLabResults: true,
-      canManagePrescriptions: false,
-      canAccessTelemedicine: true,
-      canManageEmergencyContacts: false,
-    },
-  },
+ 
+  
   user: {
     role: 'user',
     displayName: 'User',
     description: 'Basic user with limited access',
-    icon: '👤',
+    icon: 'user',
     color: '#6b7280',
     permissions: {
-      canViewAnalytics: false,
+      canViewAnalytics: true,
       canManageUsers: false,
       canAccessPatientData: false,
       canManageSystem: false,
@@ -231,10 +208,16 @@ export const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
       canManageEmergencyContacts: false,
     },
   },
+
+  
 };
 
 // Helper functions for role management
 export const getRoleConfig = (role: UserRole): RoleConfig => {
+  if (!ROLE_CONFIGS[role]) {
+    console.warn(`Role '${role}' not found in ROLE_CONFIGS, falling back to 'user' role`);
+    return ROLE_CONFIGS['user'];
+  }
   return ROLE_CONFIGS[role];
 };
 
@@ -291,7 +274,7 @@ export interface BackButtonProps {
 export interface PlaceholderScreenProps {
   title: string;
   subtitle?: string;
-  icon?: string;
+  icon?: string; // Icon name from the centralized icon system - will be cast to IconName
   description?: string;
 }
 
@@ -305,7 +288,7 @@ export interface PermissionGateProps {
 export interface ProfileItemProps {
   title: string;
   value: string;
-  icon: string;
+  icon: string; // Icon name from the centralized icon system - will be cast to IconName
 }
 
 export interface DashboardCardProps {

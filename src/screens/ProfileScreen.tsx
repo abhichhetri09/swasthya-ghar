@@ -6,15 +6,17 @@ import { useUser } from '../contexts/UserContext';
 import { getRoleConfig } from '../types';
 import { useTranslation } from '../hooks/useTranslation';
 import type { ProfileItemProps } from '../types';
+import { Icon } from '../components/Icon';
+import { IconName } from '../constants/icons';
 
 const ProfileItem: React.FC<ProfileItemProps> = ({ title, value, icon }) => {
   const { isDark } = useTheme();
   
   return (
     <View className={`p-4 border-b ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
-      <View className="flex-row items-center">
-        <Text className="text-2xl mr-3">{icon}</Text>
-        <View className="flex-1">
+             <View className="flex-row items-center">
+         <Icon name={icon as IconName} size={24} className="mr-3" />
+         <View className="flex-1">
           <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
             {title}
           </Text>
@@ -52,33 +54,33 @@ export const ProfileScreen: React.FC = () => {
         {/* Header */}
         <View className={`p-6 ${isDark ? 'bg-gray-800' : 'bg-white'} border-b ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
           <View className="items-center">
-            <Text className="text-6xl mb-4">{user.avatar || roleConfig.icon}</Text>
+            <Icon name={ roleConfig.icon as IconName} size={64} className="mb-4" />
             <Text className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
               {user.name}
             </Text>
             <Text className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               {roleConfig.displayName}
-            </Text>
+            </Text>     
           </View>
         </View>
 
         {/* Profile Information */}
         <View className={`${isDark ? 'bg-gray-800' : 'bg-white'} mt-4`}>
-          <ProfileItem
-            title={t('profile.email')}
-            value={user.email}
-            icon="📧"
-          />
-          <ProfileItem
-            title={t('profile.role')}
-            value={roleConfig.displayName}
-            icon="👤"
-          />
-          <ProfileItem
-            title={t('profile.userId')}
-            value={user.id}
-            icon="🆔"
-          />
+                     <ProfileItem
+             title={t('profile.email')}
+             value={user.email}
+             icon="email"
+           />
+           <ProfileItem
+             title={t('profile.role')}
+             value={roleConfig.displayName}
+             icon="profile"
+           />
+                       <ProfileItem
+              title={t('profile.userId')}
+              value={user.id}
+              icon="userId"
+            />
         </View>
 
         {/* Role Information */}

@@ -31,7 +31,7 @@ export const MainNavigator: React.FC = () => {
   const AnalyticsScreen = () => (
     <PlaceholderScreen 
       title={t('analytics')}
-      icon="📊"
+      icon="analytics"
       description={t('featureDescriptions.analytics')}
     />
   );
@@ -39,7 +39,7 @@ export const MainNavigator: React.FC = () => {
   const ReportsScreen = () => (
     <PlaceholderScreen 
       title={t('reports')}
-      icon="📋"
+      icon="reports"
       description={t('featureDescriptions.reports')}
     />
   );
@@ -47,7 +47,7 @@ export const MainNavigator: React.FC = () => {
   const UserManagementScreen = () => (
     <PlaceholderScreen 
       title={t('userManagement')}
-      icon="👥"
+      icon="userManagement"
       description={t('featureDescriptions.userManagement')}
     />
   );
@@ -55,7 +55,7 @@ export const MainNavigator: React.FC = () => {
   const PatientDataScreen = () => (
     <PlaceholderScreen 
       title={t('patientData')}
-      icon="🏥"
+      icon="patientData"
       description={t('featureDescriptions.patientData')}
     />
   );
@@ -63,7 +63,7 @@ export const MainNavigator: React.FC = () => {
   const SystemSettingsScreen = () => (
     <PlaceholderScreen 
       title={t('systemSettings')}
-      icon="⚙️"
+      icon="systemSettings"
       description={t('featureDescriptions.systemSettings')}
     />
   );
@@ -71,7 +71,7 @@ export const MainNavigator: React.FC = () => {
   const LogsScreen = () => (
     <PlaceholderScreen 
       title={t('logs')}
-      icon="📝"
+      icon="logs"
       description={t('featureDescriptions.logs')}
     />
   );
@@ -79,7 +79,7 @@ export const MainNavigator: React.FC = () => {
   const NotificationsScreen = () => (
     <PlaceholderScreen 
       title={t('notifications')}
-      icon="🔔"
+      icon="notifications"
       description={t('featureDescriptions.notifications')}
     />
   );
@@ -87,7 +87,7 @@ export const MainNavigator: React.FC = () => {
   const ContentManagementScreen = () => (
     <PlaceholderScreen 
       title={t('contentManagement')}
-      icon="📚"
+      icon="contentManagement"
       description={t('featureDescriptions.contentManagement')}
     />
   );
@@ -95,7 +95,7 @@ export const MainNavigator: React.FC = () => {
   const BillingScreen = () => (
     <PlaceholderScreen 
       title={t('billing')}
-      icon="💰"
+      icon="billing"
       description={t('featureDescriptions.billing')}
     />
   );
@@ -103,7 +103,7 @@ export const MainNavigator: React.FC = () => {
   const AppointmentsScreen = () => (
     <PlaceholderScreen 
       title={t('appointments')}
-      icon="📅"
+      icon="appointments"
       description={t('featureDescriptions.appointments')}
     />
   );
@@ -111,7 +111,7 @@ export const MainNavigator: React.FC = () => {
   const HealthRecordsScreen = () => (
     <PlaceholderScreen 
       title={t('healthRecords')}
-      icon="📋"
+      icon="healthRecords"
       description={t('featureDescriptions.healthRecords')}
     />
   );
@@ -119,7 +119,7 @@ export const MainNavigator: React.FC = () => {
   const MedicationsScreen = () => (
     <PlaceholderScreen 
       title={t('medications')}
-      icon="💊"
+      icon="medications"
       description={t('featureDescriptions.medications')}
     />
   );
@@ -127,7 +127,7 @@ export const MainNavigator: React.FC = () => {
   const LabResultsScreen = () => (
     <PlaceholderScreen 
       title={t('labResults')}
-      icon="🔬"
+          icon="labResults"
       description={t('featureDescriptions.labResults')}
     />
   );
@@ -135,7 +135,7 @@ export const MainNavigator: React.FC = () => {
   const PrescriptionsScreen = () => (
     <PlaceholderScreen 
       title={t('prescriptions')}
-      icon="📄"
+      icon="prescriptions"
       description={t('featureDescriptions.prescriptions')}
     />
   );
@@ -143,7 +143,7 @@ export const MainNavigator: React.FC = () => {
   const TelemedicineScreen = () => (
     <PlaceholderScreen 
       title={t('telemedicine')}
-      icon="📹"
+      icon="telemedicine"
       description={t('featureDescriptions.telemedicine')}
     />
   );
@@ -151,7 +151,7 @@ export const MainNavigator: React.FC = () => {
   const EmergencyContactsScreen = () => (
     <PlaceholderScreen 
       title={t('emergencyContacts')}
-      icon="🚨"
+        icon="emergencyContacts"
       description={t('featureDescriptions.emergencyContacts')}
     />
   );
