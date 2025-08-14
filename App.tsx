@@ -5,6 +5,7 @@ import { ThemeProvider } from './src/contexts/ThemeContext';
 import { LanguageProvider } from './src/contexts/LanguageContext';
 import { UserProvider } from './src/contexts/UserContext';
 import { AppNavigator } from './src/navigation/AppNavigator';
+import { ErrorBoundary } from './src/components/ErrorBoundary';
 import { useLanguage } from './src/contexts/LanguageContext';
 import { useTheme } from './src/contexts/ThemeContext';
 import './global.css';
@@ -32,7 +33,11 @@ const AppContent: React.FC = () => {
     );
   }
 
-  return <AppNavigator />;
+  return (
+    <ErrorBoundary>
+      <AppNavigator />
+    </ErrorBoundary>
+  );
 };
 
 export default function App() {

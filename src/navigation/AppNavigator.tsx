@@ -14,6 +14,8 @@ import { BottomTabNavigator } from './BottomTabNavigator';
 import { PlaceholderScreen } from '../components/PlaceholderScreen';
 import { SignInScreen } from '../screens/SignInScreen';
 import { SignUpScreen } from '../screens/SignUpScreen';
+import { ErrorScreen } from '../screens/ErrorScreen';
+import { ErrorDemo } from '../components/ErrorDemo';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -248,6 +250,20 @@ export const AppNavigator: React.FC = () => {
           name={SCREENS.SIGN_UP} 
           component={SignUpScreen}
           options={{ title: 'Sign Up' }}
+        />
+
+        {/* Error Screen */}
+        <Stack.Screen 
+          name={SCREENS.ERROR} 
+          component={ErrorScreen}
+          options={{ title: 'Error' }}
+        />
+
+        {/* Error Demo Screen */}
+        <Stack.Screen 
+          name={SCREENS.ERROR_DEMO} 
+          component={ErrorDemo}
+          options={{ title: 'Error Demo' }}
         />
 
         {/* Detailed Screens */}

@@ -19,12 +19,12 @@ export const PermissionGate: React.FC<PermissionGateProps> = ({
   }
 
   if (showAccessDenied) {
-    return (
-      <View className={`p-4 border rounded-lg ${isDark ? 'bg-error-900/20 border-error-700' : 'bg-error-50 border-error-200'}`}>
-        <Text className={`text-center ${isDark ? 'text-error-300' : 'text-error-600'}`}>
-          {t('accessDenied')}
-        </Text>
-      </View>
+    return (null
+      // <View className={`p-4 border rounded-lg ${isDark ? 'bg-error-900/20 border-error-700' : 'bg-error-50 border-error-200'}`}>
+      //   <Text className={`text-center ${isDark ? 'text-error-300' : 'text-error-600'}`}>
+      //     {t('accessDenied')}
+      //   </Text>
+      // </View>
     );
   }
 

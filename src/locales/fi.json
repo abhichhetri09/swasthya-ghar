@@ -151,6 +151,50 @@
   "roleNurse": "Sairaanhoitaja",
   "roleAdmin": "Ylläpitäjä",
   
+  "ok": "OK",
+  
+  "errorBoundary": {
+    "title": "Jokin meni pieleen",
+    "subtitle": "Kohtasimme odottamattoman virheen",
+    "details": "Virheen yksityiskohdat",
+    "message": "Älä huoli, tämä on vain väliaikainen ongelma. Voit yrittää uudelleen tai palata kotinäkymään.",
+    "retry": "Yritä uudelleen",
+    "goHome": "Mene kotiin",
+    "contactSupport": "Jos ongelma jatkuu, ota yhteyttä tukitiimiimme."
+  },
+  
+  "errorScreen": {
+    "retry": "Yritä uudelleen",
+    "goHome": "Mene kotiin",
+    "needHelp": "Tarvitsetko apua?",
+    "contactSupport": "Ota yhteyttä tukitiimiimme saadaksesi apua",
+    "network": {
+      "title": "Yhteysvirhe",
+      "subtitle": "Ei voida yhdistää palvelimeen",
+      "message": "Tarkista internet-yhteytesi ja yritä uudelleen."
+    },
+    "notFound": {
+      "title": "Sivua ei löytynyt",
+      "subtitle": "Etsimääsi sivua ei ole olemassa",
+      "message": "Sivu on saattanut siirtyä tai poistua."
+    },
+    "server": {
+      "title": "Palvelinvirhe",
+      "subtitle": "Jokin meni pieleen meidän puolellamme",
+      "message": "Korjaamme tätä ongelmaa. Yritä myöhemmin uudelleen."
+    },
+    "permission": {
+      "title": "Pääsy estetty",
+      "subtitle": "Sinulla ei ole oikeutta käyttää tätä",
+      "message": "Ota yhteyttä ylläpitäjääsi, jos uskot tämän olevan virhe."
+    },
+    "general": {
+      "title": "Hups!",
+      "subtitle": "Jokin meni pieleen",
+      "message": "Odottamaton virhe tapahtui. Yritä uudelleen."
+    }
+  },
+  
   "roleDescriptions": {
     "admin": "Täysi järjestelmän pääsy kaikkiin ominaisuuksiin ja käyttäjien hallintaan",
     "developer": "Tekninen pääsy sovelluksen kehitykseen, virheiden korjaukseen ja järjestelmän ylläpitoon",

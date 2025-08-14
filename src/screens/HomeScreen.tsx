@@ -176,6 +176,27 @@ export const HomeScreen: React.FC = () => {
 
         <RoleSelector />
 
+        {/* Error Demo Card */}
+        <View className={`p-6 rounded-3xl mb-6 ${isDark ? 'bg-warning-900/20' : 'bg-warning-50'}`}>
+          <View className="flex-row items-center mb-4">
+            <Icon name="warning" size={24} className="mr-2" />
+            <Text className={`text-xl font-semibold ${isDark ? 'text-warning-300' : 'text-warning-700'}`}>
+              Error Handling Demo
+            </Text>
+          </View>
+          <Text className={`mb-4 ${isDark ? 'text-warning-200' : 'text-warning-600'}`}>
+            Test the error handling system with different types of errors
+          </Text>
+          <TouchableOpacity
+            onPress={() => navigationService.goToErrorDemo()}
+            className={`py-3 px-6 rounded-lg ${isDark ? 'bg-warning-600' : 'bg-warning-500'}`}
+          >
+            <Text className="text-white text-center font-semibold">
+              Try Error Demo
+            </Text>
+          </TouchableOpacity>
+        </View>
+
         {/* Info Card */}
         <View className={`p-6 rounded-3xl mt-6 ${isDark ? 'bg-primary-900/20' : 'bg-primary-50'}`}>
           <View className="flex-row items-center justify-center">

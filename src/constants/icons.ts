@@ -96,6 +96,8 @@ export const UI_ICONS = {
   eye: '👁️',
   'eye-off': '👁️‍🗨️',
   user: '👤',
+  'wifi-off': '📶',
+  server: '🖥️',
 } as const;
 
 // Status Icons

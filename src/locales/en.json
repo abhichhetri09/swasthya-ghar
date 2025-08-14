@@ -151,6 +151,50 @@
   "roleNurse": "Nurse",
   "roleAdmin": "Administrator",
   
+  "ok": "OK",
+  
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "subtitle": "We encountered an unexpected error",
+    "details": "Error Details",
+    "message": "Don't worry, this is just a temporary issue. You can try again or go back to the home screen.",
+    "retry": "Try Again",
+    "goHome": "Go Home",
+    "contactSupport": "If the problem persists, please contact our support team."
+  },
+  
+  "errorScreen": {
+    "retry": "Try Again",
+    "goHome": "Go Home",
+    "needHelp": "Need Help?",
+    "contactSupport": "Contact our support team for assistance",
+    "network": {
+      "title": "Connection Error",
+      "subtitle": "Unable to connect to the server",
+      "message": "Please check your internet connection and try again."
+    },
+    "notFound": {
+      "title": "Page Not Found",
+      "subtitle": "The page you're looking for doesn't exist",
+      "message": "The page may have been moved or deleted."
+    },
+    "server": {
+      "title": "Server Error",
+      "subtitle": "Something went wrong on our end",
+      "message": "We're working to fix this issue. Please try again later."
+    },
+    "permission": {
+      "title": "Access Denied",
+      "subtitle": "You don't have permission to access this",
+      "message": "Please contact your administrator if you believe this is an error."
+    },
+    "general": {
+      "title": "Oops!",
+      "subtitle": "Something went wrong",
+      "message": "An unexpected error occurred. Please try again."
+    }
+  },
+  
   "roleDescriptions": {
     "admin": "Full system access with complete control over all features and user management",
     "developer": "Technical access for app development, debugging, and system maintenance",

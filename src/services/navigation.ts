@@ -14,13 +14,25 @@ class NavigationService {
     params?: RootStackParamList[T]
   ) {
     if (this.navigator) {
-      this.navigator.navigate(name as any, params as any);
+      try {
+        this.navigator.navigate(name as any, params as any);
+      } catch (error) {
+        console.warn('Navigation failed:', error);
+      }
+    } else {
+      console.warn('Navigation not available yet. Navigator not set.');
     }
   }
 
   goBack() {
     if (this.navigator) {
-      this.navigator.goBack();
+      try {
+        this.navigator.goBack();
+      } catch (error) {
+        console.warn('Navigation failed:', error);
+      }
+    } else {
+      console.warn('Navigation not available yet. Navigator not set.');
     }
   }
 
@@ -101,6 +113,14 @@ class NavigationService {
 
   goToSignUp() {
     this.navigate(SCREENS.SIGN_UP);
+  }
+
+  goToError(errorType?: string, errorCode?: string, message?: string) {
+    this.navigate(SCREENS.ERROR, { errorType, errorCode, message });
+  }
+
+  goToErrorDemo() {
+    this.navigate(SCREENS.ERROR_DEMO);
   }
 }
 

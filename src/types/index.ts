@@ -9,6 +9,8 @@ export type RootStackParamList = {
   Profile: undefined;
   SignIn: undefined;
   SignUp: undefined;
+  Error: { errorType?: string; errorCode?: string; message?: string };
+  ErrorDemo: undefined;
   Analytics: undefined;
   Reports: undefined;
   UserManagement: undefined;
@@ -41,6 +43,8 @@ export const SCREENS = {
   PROFILE: 'Profile',
   SIGN_IN: 'SignIn',
   SIGN_UP: 'SignUp',
+  ERROR: 'Error',
+  ERROR_DEMO: 'ErrorDemo',
   ANALYTICS: 'Analytics',
   REPORTS: 'Reports',
   USER_MANAGEMENT: 'UserManagement',
