@@ -12,6 +12,8 @@ import { BottomTabNavigator } from './BottomTabNavigator';
 
 // Import detailed screens
 import { PlaceholderScreen } from '../components/PlaceholderScreen';
+import { SignInScreen } from '../screens/SignInScreen';
+import { SignUpScreen } from '../screens/SignUpScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -22,7 +24,7 @@ export const AppNavigator: React.FC = () => {
   React.useEffect(() => {
     if (navigationRef.current) {
       navigationService.setNavigator(navigationRef.current);
-    }
+    } 
   }, []);
 
   // Create screen components inside the main component to access context
@@ -51,7 +53,7 @@ export const AppNavigator: React.FC = () => {
   };
 
   const UserManagementScreen = () => {
-    const { useTranslation } = require('../hooks/useTranslation');
+    const { useTranslation } = require('../hooks/useTranslation');    
     const { t } = useTranslation();
     return (
       <PlaceholderScreen 
@@ -233,6 +235,19 @@ export const AppNavigator: React.FC = () => {
           name={SCREENS.HOME} 
           component={BottomTabNavigator}
           options={{ title: 'Main' }}
+        />
+
+        {/* Authentication Screens */}
+        <Stack.Screen 
+          name={SCREENS.SIGN_IN} 
+          component={SignInScreen}
+          options={{ title: 'Sign In' }}
+        />
+
+        <Stack.Screen 
+          name={SCREENS.SIGN_UP} 
+          component={SignUpScreen}
+          options={{ title: 'Sign Up' }}
         />
 
         {/* Detailed Screens */}

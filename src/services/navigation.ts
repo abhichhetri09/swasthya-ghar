@@ -94,6 +94,14 @@ class NavigationService {
   goToEmergencyContacts() {
     this.navigate(SCREENS.EMERGENCY_CONTACTS);
   }
+
+  goToSignIn() {
+    this.navigate(SCREENS.SIGN_IN);
+  }
+
+  goToSignUp() {
+    this.navigate(SCREENS.SIGN_UP);
+  }
 }
 
 export const navigationService = new NavigationService();

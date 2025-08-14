@@ -92,6 +92,10 @@ export const UI_ICONS = {
   chevronUp: '⌃',
   chevronDown: '⌄',
   userId: '🆔',
+  lock: '🔒',
+  eye: '👁️',
+  'eye-off': '👁️‍🗨️',
+  user: '👤',
 } as const;
 
 // Status Icons

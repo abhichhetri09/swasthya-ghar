@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
 import { useNavigation } from '../hooks/useNavigation';
+import { navigationService } from '../services/navigation';
 
 import { RoleSelector } from '../components/RoleSelector';
 import { PermissionGate } from '../components/PermissionGate';
@@ -18,7 +19,6 @@ export const HomeScreen: React.FC = () => {
   const { isDark } = useTheme();
   const { t, language } = useTranslation();
   const { user, currentRole } = useUser();
-  const navigation = useNavigation();
 
   const roleConfig = getRoleConfig(currentRole);
 
@@ -40,9 +40,9 @@ export const HomeScreen: React.FC = () => {
           <Text className={`text-xl font-semibold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             {t('currentStatus')}
           </Text>
-                     <View className="flex-row items-center mb-2">
-             <Icon name={roleConfig.icon as IconName} size={32} className="mr-3" />
-             <View className="flex-1">
+          <View className="flex-row items-center mb-2">
+            <Icon name={roleConfig.icon as IconName} size={32} className="mr-3" />
+            <View className="flex-1">
               <Text className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 {user ? user.name : t('notLoggedIn')}
               </Text>
@@ -57,6 +57,32 @@ export const HomeScreen: React.FC = () => {
               />
             )}
           </View>
+          
+          {/* Sign In/Sign Up Buttons for non-logged in users */}
+          {!user && (
+            <View className="flex-row space-x-3 mt-4">
+              <TouchableOpacity
+                onPress={() => navigationService.navigate('SignIn')}
+                className={`flex-1 py-3 px-6 rounded-lg ${isDark ? 'bg-blue-600' : 'bg-blue-500'}`}
+              >
+                <Text className="text-white text-center font-semibold">
+                  {t('signIn')}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigationService.navigate('SignUp')}
+                className={`flex-1 py-3 px-6 rounded-lg border-2 ${
+                  isDark ? 'border-blue-400 bg-transparent' : 'border-blue-500 bg-transparent'
+                }`}
+              >
+                <Text className={`text-center font-semibold ${
+                  isDark ? 'text-blue-400' : 'text-blue-500'
+                }`}>
+                  {t('signUp')}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
 
         {/* Role-Based Content */}
@@ -141,7 +167,7 @@ export const HomeScreen: React.FC = () => {
               </Text>
               <View className={`px-3 py-1 rounded-full ${isDark ? 'bg-secondary-900' : 'bg-secondary-100'}`}>
                 <Text className={`font-medium ${isDark ? 'text-secondary-300' : 'text-secondary-700'}`}>
-                  {language === 'en' ? t('english') : t('finnish')}
+                  {language === 'en' ? t('english') : language === 'fi' ? t('finnish') : language === 'ne' ? t('nepali') : t('english')}
                 </Text>
               </View>
             </View>

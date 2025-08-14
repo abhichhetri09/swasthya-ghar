@@ -7,6 +7,8 @@ export type RootStackParamList = {
   Settings: undefined;
   Dashboard: undefined;
   Profile: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
   Analytics: undefined;
   Reports: undefined;
   UserManagement: undefined;
@@ -37,6 +39,8 @@ export const SCREENS = {
   SETTINGS: 'Settings',
   DASHBOARD: 'Dashboard',
   PROFILE: 'Profile',
+  SIGN_IN: 'SignIn',
+  SIGN_UP: 'SignUp',
   ANALYTICS: 'Analytics',
   REPORTS: 'Reports',
   USER_MANAGEMENT: 'UserManagement',
