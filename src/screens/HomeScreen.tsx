@@ -6,6 +6,7 @@ import { Colors } from '../constants/colors';
 import { useTranslation } from '../hooks/useTranslation';
 import { Button } from '../components/Button';
 import { navigationService } from '../services/navigation';
+import { SCREENS } from '../types';
 
 export const HomeScreen: React.FC = () => {
   const { isDark } = useTheme();
@@ -20,13 +21,14 @@ export const HomeScreen: React.FC = () => {
         <Text style={[styles.subtitle, { color: isDark ? Colors.text.dark.secondary : Colors.text.light.secondary }]}>
           {t('appDescription')}
         </Text>
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: 20, gap: 12 }}>
           <Button 
             title="View Button Demo" 
             onPress={() => navigationService.navigate('Test')} 
             variant="primary"
             size="large"
           />
+     
         </View>
       </View>
 

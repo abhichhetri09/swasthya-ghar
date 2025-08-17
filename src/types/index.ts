@@ -8,6 +8,9 @@ export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   Test: undefined;
+  TextInputDemo: undefined;
+  SelectDemo: undefined;
+  DatePickerDemo: undefined;
   Error: { errorType?: string; errorCode?: string; message?: string };
 };
 
@@ -17,12 +20,15 @@ export type TabParamList = {
   SignUp: undefined;
   SettingsTab: undefined;
 };
-
+    
 export const SCREENS = {
   HOME: 'Home',
   SIGN_IN: 'SignIn',
   SIGN_UP: 'SignUp',
   TEST: 'Test',
+  TEXT_INPUT_DEMO: 'TextInputDemo',
+  SELECT_DEMO: 'SelectDemo',
+  DATE_PICKER_DEMO: 'DatePickerDemo',
   ERROR: 'Error',
 } as const;
 

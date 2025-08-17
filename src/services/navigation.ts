@@ -59,6 +59,14 @@ class NavigationService {
   goToTest() {
     this.navigate(SCREENS.TEST);
   }
+
+      goToSelectDemo() {
+    this.navigate(SCREENS.SELECT_DEMO);
+  }
+
+  goToDatePickerDemo() {
+    this.navigate(SCREENS.DATE_PICKER_DEMO);
+  }
 }
 
 export const navigationService = new NavigationService();

@@ -57,6 +57,7 @@ export const MainNavigator: React.FC = () => {
           component={ButtonDemo}
           options={{ title: t('test') }}
         />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

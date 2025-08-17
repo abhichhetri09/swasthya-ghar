@@ -18,6 +18,7 @@ import { SignUpScreen } from '../screens/SignUpScreen';
 import { ErrorScreen } from '../screens/ErrorScreen';
 import { ButtonDemo } from '../components/ButtonDemo';
 
+
 const Stack = createStackNavigator<RootStackParamList>();
 
 export const AppNavigator: React.FC = () => {
@@ -73,7 +74,7 @@ export const AppNavigator: React.FC = () => {
           component={ButtonDemo}
           options={{ title: 'Button Demo' }}
         />
-      
+
       </Stack.Navigator>
     </NavigationContainer>
   );

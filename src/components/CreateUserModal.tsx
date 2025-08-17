@@ -20,6 +20,7 @@ import {
 import { useAppDispatch } from '../store';
 import { createUser } from '../store/slices/userSlice';
 import { Colors } from '../constants/colors';
+import { TextInput as CustomTextInput } from './TextInput';
 import { User } from '../types/database';
 
 interface CreateUserModalProps {
@@ -137,16 +138,14 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({
           <View style={styles.formSection}>
             <Text style={styles.sectionTitle}>Basic Information</Text>
             
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Full Name *</Text>
-              <TextInput
-                style={styles.input}
-                value={formData.full_name}
-                onChangeText={(value) => updateField('full_name', value)}
-                placeholder="Enter full name"
-                placeholderTextColor={Colors.charcoal[300]}
-              />
-            </View>
+            <CustomTextInput
+              label="Full Name"
+              placeholder="Enter full name"
+              leftIcon="user"
+              required
+              value={formData.full_name}
+              onChangeText={(value) => updateField('full_name', value)}
+            />
 
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Email *</Text>
