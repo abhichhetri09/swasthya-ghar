@@ -119,7 +119,7 @@ export const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
     displayName: 'Administrator',
     description: 'Full system access and management capabilities',
     icon: 'admin',
-    color: '#ef4444',
+    color: '#007C91', // Cerulean
     permissions: {
       canViewAnalytics: true,
       canManageUsers: true,
@@ -144,7 +144,7 @@ export const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
     displayName: 'Doctor',
     description: 'Medical professional with patient care access',
     icon: 'doctor',
-    color: '#3b82f6',
+    color: '#22c55e', // Success green
     permissions: {
       canViewAnalytics: true,
       canManageUsers: false,
@@ -169,7 +169,7 @@ export const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
     displayName: 'Nurse',
     description: 'Healthcare provider with patient support access',
     icon: 'nurse',
-    color: '#10b981',
+    color: '#3b82f6', // Blue
     permissions: {
       canViewAnalytics: false,
       canManageUsers: false,
@@ -196,7 +196,7 @@ export const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
     displayName: 'User',
     description: 'Basic user with limited access',
     icon: 'user',
-    color: '#6b7280',
+    color: '#6b7280', // Neutral gray
     permissions: {
       canViewAnalytics: true,
       canManageUsers: false,

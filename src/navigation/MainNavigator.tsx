@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from '../contexts/ThemeContext';
+import { Colors } from '../constants/colors';
 import { navigationService } from '../services/navigation';
 import type { RootStackParamList } from '../types';
 import { SCREENS } from '../types';
@@ -163,7 +164,7 @@ export const MainNavigator: React.FC = () => {
         initialRouteName={SCREENS.HOME}
         screenOptions={{
           headerShown: false,
-          cardStyle: { backgroundColor: isDark ? '#111827' : '#f9fafb' },
+          cardStyle: { backgroundColor: isDark ? Colors.background.dark : Colors.background.light },
         }}
       >
         {/* Main Tab Navigator */}

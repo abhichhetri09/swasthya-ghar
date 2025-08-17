@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../contexts/ThemeContext';
+import { Colors } from '../constants/colors';
 import { useUser } from '../contexts/UserContext';
 import { useTranslation } from '../hooks/useTranslation';
 import { Icon } from '../components/Icon';
@@ -88,7 +89,7 @@ export const SignInScreen: React.FC = () => {
                 value={email}
                 onChangeText={setEmail}
                 placeholder={t('enterEmail')}
-                placeholderTextColor={isDark ? '#9ca3af' : '#6b7280'}
+                placeholderTextColor={isDark ? Colors.neutral[400] : Colors.neutral[500]}
                 className={`flex-1 text-base ${isDark ? 'text-white' : 'text-gray-900'}`}
                 keyboardType="email-address"
                 autoCapitalize="none"
@@ -110,7 +111,7 @@ export const SignInScreen: React.FC = () => {
                 value={password}
                 onChangeText={setPassword}
                 placeholder={t('enterPassword')}
-                placeholderTextColor={isDark ? '#9ca3af' : '#6b7280'}
+                placeholderTextColor={isDark ? Colors.neutral[400] : Colors.neutral[500]}
                 className={`flex-1 text-base ${isDark ? 'text-white' : 'text-gray-900'}`}
                 secureTextEntry={!showPassword}
                 autoCapitalize="none"

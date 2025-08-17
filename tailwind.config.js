@@ -7,31 +7,31 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Primary Colors
+        // AarogyaCare Brand Colors
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
+          50: '#e6f4f7',
+          100: '#cce9ef',
+          200: '#99d3df',
+          300: '#66bdcf',
+          400: '#33a7bf',
+          500: '#007C91', // Cerulean - Main brand color
+          600: '#006f82',
+          700: '#006273',
+          800: '#005564',
+          900: '#004855',
         },
-        // Secondary Colors
+        // Secondary Colors (Mint Green)
         secondary: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
+          50: '#f7fbfa',
+          100: '#eff7f4',
+          200: '#dfefea',
+          300: '#cfe7e0',
+          400: '#bfdfd6',
+          500: '#D1E8E2', // Mint Green
+          600: '#bcd1cc',
+          700: '#a7bab6',
+          800: '#92a3a0',
+          900: '#7d8c8a',
         },
         // Error Colors
         error: {
@@ -72,12 +72,64 @@ module.exports = {
           800: '#166534',
           900: '#14532d',
         },
-        // Role Colors
+        // Charcoal - Primary text color
+        charcoal: {
+          50: '#f8f9fa',
+          100: '#e9ecef',
+          200: '#dee2e6',
+          300: '#ced4da',
+          400: '#adb5bd',
+          500: '#6c757d',
+          600: '#495057',
+          700: '#343a40',
+          800: '#2C3E50', // Charcoal - Primary text color
+          900: '#212529',
+        },
+        // Seasalt - Background color
+        seasalt: {
+          50: '#ffffff',
+          100: '#fefefe',
+          200: '#fdfdfd',
+          300: '#fcfcfc',
+          400: '#fbfbfb',
+          500: '#F7F9FA', // Seasalt - Main background
+          600: '#f6f8f9',
+          700: '#f5f7f8',
+          800: '#f4f6f7',
+          900: '#f3f5f6',
+        },
+        // Gold/Amber - Accent color
+        accent: {
+          50: '#fffbf0',
+          100: '#fef7e0',
+          200: '#fdeec1',
+          300: '#fce5a2',
+          400: '#fbdc83',
+          500: '#F5B700', // Gold/Amber - Accent color
+          600: '#f4ae00',
+          700: '#f3a500',
+          800: '#f29c00',
+          900: '#f19300',
+        },
+        // Neutral Colors (based on Charcoal)
+        neutral: {
+          50: '#f8f9fa',
+          100: '#e9ecef',
+          200: '#dee2e6',
+          300: '#ced4da',
+          400: '#adb5bd',
+          500: '#6c757d',
+          600: '#495057',
+          700: '#343a40',
+          800: '#2C3E50', // Charcoal
+          900: '#212529',
+        },
+        // Role Colors (Healthcare-themed)
         role: {
-          admin: '#dc2626',
-          developer: '#2563eb',
-          member: '#059669',
-          user: '#7c3aed',
+          admin: '#007C91', // Cerulean
+          doctor: '#22c55e', // Success green
+          nurse: '#3b82f6', // Blue
+          user: '#6b7280', // Neutral gray
         },
       },
     },

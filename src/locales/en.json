@@ -1,5 +1,5 @@
 {
-  "welcome": "Welcome to SwasthyaGhar",
+  "welcome": "Welcome to AarogyaCare",
   "appDescription": "Your Health Companion",
   "subtitle": "Your Health Companion",
   "back": "Back",
@@ -131,7 +131,7 @@
   "creatingAccount": "Creating Account...",
   "signInToContinue": "Sign in to continue to your account",
   "createAccount": "Create Account",
-  "signUpDescription": "Join SwasthyaGhar to manage your health",
+  "signUpDescription": "Join AarogyaCare to manage your health",
   "fullName": "Full Name",
   "enterFullName": "Enter your full name",
   "enterEmail": "Enter your email",

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, TextProps } from 'react-native';
 import { getIcon, IconName } from '../constants/icons';
+import { Colors } from '../constants/colors';
 
 interface IconProps extends Omit<TextProps, 'children'> {
   name: IconName;
@@ -12,7 +13,7 @@ interface IconProps extends Omit<TextProps, 'children'> {
 export const Icon: React.FC<IconProps> = ({ 
   name, 
   size = 24, 
-  color = '#000000', 
+  color = Colors.charcoal[800], 
   focused = false,
   style,
   ...props 

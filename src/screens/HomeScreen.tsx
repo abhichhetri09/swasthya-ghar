@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../contexts/ThemeContext';
 import { useUser } from '../contexts/UserContext';
@@ -12,6 +12,7 @@ import { useTranslation } from '../hooks/useTranslation';
 import { getRoleConfig, UserRole } from '../types';
 import { Icon } from '../components/Icon';
 import { IconName } from '../constants/icons';
+import { Colors, getAarogyaCareColor } from '../constants/colors';
 
 
 
@@ -205,6 +206,7 @@ export const HomeScreen: React.FC = () => {
               {t('settings.info')}
             </Text>
           </View>
+          <Button title="Go to Error Demo" onPress={() => navigationService.goToErrorDemo()} color={Colors.primary[800]} />
         </View>
       </ScrollView>
     </SafeAreaView>

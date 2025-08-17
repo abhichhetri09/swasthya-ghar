@@ -1,6 +1,6 @@
-# SwasthyaGhar - Health Companion App
+# AarogyaCare - Health Companion App
 
-A React Native mobile application built with Expo, featuring dark/light mode and multi-language support (English and Finnish).
+A React Native mobile application built with Expo, featuring dark/light mode and multi-language support (English, Finnish, and Nepali).
 
 ## Features
 
@@ -32,7 +32,7 @@ A React Native mobile application built with Expo, featuring dark/light mode and
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd SwasthyaGhar
+   cd AarogyaCare
    ```
 
 2. **Install dependencies**
@@ -113,4 +113,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Support
 
-For support, email support@swasthyaghar.com or create an issue in the repository.
+For support, email support@aarogyacare.com or create an issue in the repository.

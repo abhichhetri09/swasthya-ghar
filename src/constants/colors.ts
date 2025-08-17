@@ -1,33 +1,77 @@
 export const Colors = {
+  // AarogyaCare Brand Colors
+  
   // Primary Colors
   primary: {
-    50: '#eff6ff',
-    100: '#dbeafe',
-    200: '#bfdbfe',
-    300: '#93c5fd',
-    400: '#60a5fa',
-    500: '#3b82f6',
-    600: '#2563eb',
-    700: '#1d4ed8',
-    800: '#1e40af',
-    900: '#1e3a8a',
+    50: '#e6f4f7',
+    100: '#cce9ef',
+    200: '#99d3df',
+    300: '#66bdcf',
+    400: '#33a7bf',
+    500: '#007C91', // Cerulean - Main brand color
+    600: '#006f82',
+    700: '#006273',
+    800: '#005564',
+    900: '#004855',
   },
 
   // Secondary Colors
   secondary: {
-    50: '#f0fdf4',
-    100: '#dcfce7',
-    200: '#bbf7d0',
-    300: '#86efac',
-    400: '#4ade80',
-    500: '#22c55e',
-    600: '#16a34a',
-    700: '#15803d',
-    800: '#166534',
-    900: '#14532d',
+    50: '#f7fbfa',
+    100: '#eff7f4',
+    200: '#dfefea',
+    300: '#cfe7e0',
+    400: '#bfdfd6',
+    500: '#D1E8E2', // Mint Green
+    600: '#bcd1cc',
+    700: '#a7bab6',
+    800: '#92a3a0',
+    900: '#7d8c8a',
   },
 
-  // Error Colors
+  // Charcoal - Primary text color
+  charcoal: {
+    50: '#f8f9fa',
+    100: '#e9ecef',
+    200: '#dee2e6',
+    300: '#ced4da',
+    400: '#adb5bd',
+    500: '#6c757d',
+    600: '#495057',
+    700: '#343a40',
+    800: '#2C3E50', // Charcoal - Primary text color
+    900: '#212529',
+  },
+
+  // Seasalt - Background color
+  seasalt: {
+    50: '#ffffff',
+    100: '#fefefe',
+    200: '#fdfdfd',
+    300: '#fcfcfc',
+    400: '#fbfbfb',
+    500: '#F7F9FA', // Seasalt - Main background
+    600: '#f6f8f9',
+    700: '#f5f7f8',
+    800: '#f4f6f7',
+    900: '#f3f5f6',
+  },
+
+  // Gold/Amber - Accent color (optional)
+  accent: {
+    50: '#fffbf0',
+    100: '#fef7e0',
+    200: '#fdeec1',
+    300: '#fce5a2',
+    400: '#fbdc83',
+    500: '#F5B700', // Gold/Amber - Accent color
+    600: '#f4ae00',
+    700: '#f3a500',
+    800: '#f29c00',
+    900: '#f19300',
+  },
+
+  // Error Colors (Healthcare-appropriate reds)
   error: {
     50: '#fef2f2',
     100: '#fee2e2',
@@ -41,7 +85,7 @@ export const Colors = {
     900: '#7f1d1d',
   },
 
-  // Warning Colors
+  // Warning Colors (Healthcare-appropriate yellows)
   warning: {
     50: '#fffbeb',
     100: '#fef3c7',
@@ -55,7 +99,7 @@ export const Colors = {
     900: '#78350f',
   },
 
-  // Success Colors
+  // Success Colors (Healthcare-appropriate greens)
   success: {
     50: '#f0fdf4',
     100: '#dcfce7',
@@ -69,18 +113,18 @@ export const Colors = {
     900: '#14532d',
   },
 
-  // Neutral Colors
+  // Neutral Colors (based on Charcoal)
   neutral: {
-    50: '#fafafa',
-    100: '#f5f5f5',
-    200: '#e5e5e5',
-    300: '#d4d4d4',
-    400: '#a3a3a3',
-    500: '#737373',
-    600: '#525252',
-    700: '#404040',
-    800: '#262626',
-    900: '#171717',
+    50: '#f8f9fa',
+    100: '#e9ecef',
+    200: '#dee2e6',
+    300: '#ced4da',
+    400: '#adb5bd',
+    500: '#6c757d',
+    600: '#495057',
+    700: '#343a40',
+    800: '#2C3E50', // Charcoal
+    900: '#212529',
   },
 
   // Gray Colors (for backward compatibility)
@@ -97,56 +141,56 @@ export const Colors = {
     900: '#111827',
   },
 
-  // Role-specific Colors
+  // Role-specific Colors (Healthcare-themed)
   roles: {
-    admin: '#dc2626', // Red
-    developer: '#2563eb', // Blue
-    member: '#059669', // Green
-    user: '#7c3aed', // Purple
+    admin: '#007C91', // Cerulean
+    doctor: '#22c55e', // Success green
+    nurse: '#3b82f6', // Blue
+    user: '#6b7280', // Neutral gray
   },
 
-  // Status Colors
+  // Status Colors (Healthcare-appropriate)
   status: {
-    online: '#22c55e',
-    offline: '#6b7280',
-    busy: '#ef4444',
-    away: '#f59e0b',
+    online: '#22c55e', // Success green
+    offline: '#6b7280', // Neutral gray
+    busy: '#ef4444', // Error red
+    away: '#f59e0b', // Warning yellow
   },
 
-  // Background Colors
+  // Background Colors (using AarogyaCare colors)
   background: {
-    light: '#ffffff',
-    dark: '#111827',
-    lightSecondary: '#f9fafb',
-    darkSecondary: '#1f2937',
+    light: '#F7F9FA', // Seasalt
+    dark: '#2C3E50', // Charcoal
+    lightSecondary: '#D1E8E2', // Mint Green
+    darkSecondary: '#1a252f', // Darker Charcoal
   },
 
-  // Text Colors
+  // Text Colors (using AarogyaCare colors)
   text: {
     light: {
-      primary: '#111827',
-      secondary: '#6b7280',
-      tertiary: '#9ca3af',
-      inverse: '#ffffff',
+      primary: '#2C3E50', // Charcoal
+      secondary: '#6c757d', // Neutral 500
+      tertiary: '#adb5bd', // Neutral 400
+      inverse: '#F7F9FA', // Seasalt
     },
     dark: {
-      primary: '#ffffff',
-      secondary: '#d1d5db',
-      tertiary: '#9ca3af',
-      inverse: '#111827',
+      primary: '#F7F9FA', // Seasalt
+      secondary: '#D1E8E2', // Mint Green
+      tertiary: '#adb5bd', // Neutral 400
+      inverse: '#2C3E50', // Charcoal
     },
   },
 
-  // Border Colors
+  // Border Colors (using AarogyaCare colors)
   border: {
-    light: '#e5e7eb',
-    dark: '#374151',
+    light: '#D1E8E2', // Mint Green
+    dark: '#495057', // Charcoal 600
   },
 
   // Shadow Colors
   shadow: {
-    light: 'rgba(0, 0, 0, 0.1)',
-    dark: 'rgba(0, 0, 0, 0.3)',
+    light: 'rgba(44, 62, 80, 0.1)', // Charcoal with opacity
+    dark: 'rgba(44, 62, 80, 0.3)', // Charcoal with opacity
   },
 } as const;
 
@@ -176,4 +220,13 @@ export const getBackgroundColor = (isDark: boolean, variant: 'primary' | 'second
     ? (variant === 'secondary' ? 'darkSecondary' : 'dark')
     : (variant === 'secondary' ? 'lightSecondary' : 'light');
   return Colors.background[key];
+};
+
+// AarogyaCare specific helper functions
+export const getAarogyaCareColor = {
+  cerulean: () => Colors.primary[500], // #007C91
+  charcoal: () => Colors.charcoal[800], // #2C3E50
+  mintGreen: () => Colors.secondary[500], // #D1E8E2
+  seasalt: () => Colors.seasalt[500], // #F7F9FA
+  gold: () => Colors.accent[500], // #F5B700
 };

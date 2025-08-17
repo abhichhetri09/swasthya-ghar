@@ -1,5 +1,5 @@
 {
-  "welcome": "Tervetuloa SwasthyaGhar",
+  "welcome": "Tervetuloa AarogyaCare",
   "appDescription": "Terveysystäväsi",
   "subtitle": "Terveysystäväsi",
   "back": "Takaisin",
@@ -131,7 +131,7 @@
   "creatingAccount": "Luodaan tiliä...",
   "signInToContinue": "Kirjaudu sisään jatkaaksesi tilillesi",
   "createAccount": "Luo tili",
-  "signUpDescription": "Liity SwasthyaGhar:iin hallitsemaan terveyttäsi",
+  "signUpDescription": "Liity AarogyaCare:iin hallitsemaan terveyttäsi",
   "fullName": "Koko nimi",
   "enterFullName": "Syötä koko nimesi",
   "enterEmail": "Syötä sähköpostiosoitteesi",

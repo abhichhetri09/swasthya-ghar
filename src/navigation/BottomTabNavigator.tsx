@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from '../contexts/ThemeContext';
+import { Colors } from '../constants/colors';
 import { useUser } from '../contexts/UserContext';
 import { useTranslation } from '../hooks/useTranslation';
 import type { TabParamList } from '../types';
@@ -65,15 +66,13 @@ export const BottomTabNavigator: React.FC = () => {
             size={size} 
           />
         ),
-        tabBarActiveTintColor: isDark ? '#3b82f6' : '#2563eb',
-        tabBarInactiveTintColor: isDark ? '#6b7280' : '#9ca3af',
-        tabBarStyle: {
-          backgroundColor: isDark ? '#1f2937' : '#ffffff',
-          borderTopColor: isDark ? '#374151' : '#e5e7eb',
+            tabBarActiveTintColor: isDark ? Colors.primary[500] : Colors.primary[600],
+    tabBarInactiveTintColor: isDark ? Colors.neutral[500] : Colors.neutral[400],
+    tabBarStyle: {
+      backgroundColor: isDark ? Colors.background.darkSecondary : Colors.background.light,
+      borderTopColor: isDark ? Colors.border.dark : Colors.border.light,
           borderTopWidth: 1,
-          paddingBottom: 5,
-          height: 60,
-        },
+       },
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: '600',
