@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from './src/contexts/ThemeContext';
 import { LanguageProvider } from './src/contexts/LanguageContext';
 import { UserProvider } from './src/contexts/UserContext';
@@ -9,6 +10,7 @@ import { ErrorBoundary } from './src/components/ErrorBoundary';
 import { useLanguage } from './src/contexts/LanguageContext';
 import { useTheme } from './src/contexts/ThemeContext';
 import { Colors } from './src/constants/colors';
+import { store } from './src/store';
 import './global.css';
 
 const AppContent: React.FC = () => {
@@ -43,14 +45,16 @@ const AppContent: React.FC = () => {
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <ThemeProvider>
-        <LanguageProvider>
-          <UserProvider>
-            <AppContent />
-          </UserProvider>
-        </LanguageProvider>
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            <UserProvider>
+              <AppContent />
+            </UserProvider>
+          </LanguageProvider>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </Provider>
   );
 }

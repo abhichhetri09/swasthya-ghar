@@ -7,6 +7,10 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
+    "dev": "concurrently --kill-others --prefix-colors \"blue.bold,green.bold\" --prefix \"[{name}]\" --names \"SERVER,EXPO\" \"npm run server\" \"npm start\"",
+    "dev:server": "start /B npm run server",
+    "dev:expo": "npm start",
+    "server": "cd server && npm start",
     "db:migrate": "node database/migrate.js",
     "db:migrate:up": "node database/migrate.js up",
     "db:migrate:down": "node database/migrate.js down",
@@ -19,6 +23,7 @@
     "@react-navigation/bottom-tabs": "^7.4.6",
     "@react-navigation/native": "^7.1.17",
     "@react-navigation/stack": "^7.4.7",
+    "@reduxjs/toolkit": "^2.2.1",
     "expo": "~53.0.20",
     "expo-status-bar": "~2.2.3",
     "i18next": "^25.3.6",
@@ -28,11 +33,13 @@
     "react-native": "0.79.5",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-reanimated": "~3.17.4",
-    "react-native-safe-area-context": "^5.4.0"
+    "react-native-safe-area-context": "^5.4.0",
+    "react-redux": "^9.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
+    "concurrently": "^9.2.0",
     "pg": "^8.16.3",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.17",

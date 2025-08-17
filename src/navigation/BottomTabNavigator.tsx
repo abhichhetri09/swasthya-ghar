@@ -2,7 +2,6 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from '../contexts/ThemeContext';
 import { Colors } from '../constants/colors';
-import { useUser } from '../contexts/UserContext';
 import { useTranslation } from '../hooks/useTranslation';
 import type { TabParamList } from '../types';
 import { TABS } from '../types';
@@ -11,8 +10,6 @@ import { IconName } from '../constants/icons';
 
 // Import screens
 import { HomeScreen } from '../screens/HomeScreen';
-import { DashboardScreen } from '../screens/DashboardScreen';
-import { ProfileScreen } from '../screens/ProfileScreen';
 import { SettingsScreen } from '../screens/SettingsScreen';
 
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -32,8 +29,6 @@ const TabBarIcon: React.FC<{
   // Map route names to icon names
   const iconMap: Record<string, string> = {
     home: 'home',
-    dashboard: 'dashboard',
-    profile: 'profile',
     settings: 'settings',
   };
 
@@ -52,7 +47,6 @@ const TabBarIcon: React.FC<{
 export const BottomTabNavigator: React.FC = () => {
   const { isDark } = useTheme();
   const { t } = useTranslation();
-  const { user } = useUser();
 
   return (
     <Tab.Navigator
@@ -66,13 +60,13 @@ export const BottomTabNavigator: React.FC = () => {
             size={size} 
           />
         ),
-            tabBarActiveTintColor: isDark ? Colors.primary[500] : Colors.primary[600],
-    tabBarInactiveTintColor: isDark ? Colors.neutral[500] : Colors.neutral[400],
-    tabBarStyle: {
-      backgroundColor: isDark ? Colors.background.darkSecondary : Colors.background.light,
-      borderTopColor: isDark ? Colors.border.dark : Colors.border.light,
+        tabBarActiveTintColor: isDark ? Colors.primary[500] : Colors.primary[600],
+        tabBarInactiveTintColor: isDark ? Colors.neutral[500] : Colors.neutral[400],
+        tabBarStyle: {
+          backgroundColor: isDark ? Colors.background.darkSecondary : Colors.background.light,
+          borderTopColor: isDark ? Colors.border.dark : Colors.border.light,
           borderTopWidth: 1,
-       },
+        },
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: '600',
@@ -87,24 +81,6 @@ export const BottomTabNavigator: React.FC = () => {
         options={{
           title: t('home'),
           tabBarLabel: t('home'),
-        }}
-      />
-      
-      <Tab.Screen
-        name={TABS.DASHBOARD}
-        component={DashboardScreen}
-        options={{
-          title: t('dashboard'),
-          tabBarLabel: t('dashboard'),
-        }}
-      />
-      
-      <Tab.Screen
-        name={TABS.PROFILE}
-        component={ProfileScreen}
-        options={{
-          title: t('profile.title'),
-          tabBarLabel: t('profile.title'),
         }}
       />
       

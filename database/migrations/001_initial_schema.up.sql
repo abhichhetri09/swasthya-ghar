@@ -1,17 +1,14 @@
 -- ============================================================================
 -- AAROGYACARE HEALTHCARE DATABASE MIGRATION
--- Initial Schema Creation (UP Migration)
+-- Initial Schema Creation (UP Migration) - Using Integer IDs for Development
 -- ============================================================================
-
--- Enable UUID extension
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- ============================================================================
 -- USERS TABLE
 -- ============================================================================
 
 CREATE TABLE users (
-    user_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id SERIAL PRIMARY KEY,
     full_name VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -23,7 +20,7 @@ CREATE TABLE users (
     emergency_contact_relationship VARCHAR(50),
     allergies TEXT[] DEFAULT ARRAY[]::text[],
     current_medications TEXT[] DEFAULT ARRAY[]::text[],
-    insurance_id UUID,
+    insurance_id INTEGER,
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
@@ -34,7 +31,7 @@ CREATE TABLE users (
 -- ============================================================================
 
 CREATE TABLE healthcare_professionals (
-    professional_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    professional_id SERIAL PRIMARY KEY,
     full_name VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -54,7 +51,7 @@ CREATE TABLE healthcare_professionals (
 -- ============================================================================
 
 CREATE TABLE services (
-    service_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    service_id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     base_price DECIMAL(10,2) NOT NULL,
@@ -72,10 +69,10 @@ CREATE TABLE services (
 -- ============================================================================
 
 CREATE TABLE bookings (
-    booking_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
-    professional_id UUID NOT NULL REFERENCES healthcare_professionals(professional_id) ON DELETE CASCADE,
-    service_id UUID NOT NULL REFERENCES services(service_id) ON DELETE CASCADE,
+    booking_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    professional_id INTEGER NOT NULL REFERENCES healthcare_professionals(professional_id) ON DELETE CASCADE,
+    service_id INTEGER NOT NULL REFERENCES services(service_id) ON DELETE CASCADE,
     requested_at TIMESTAMP WITH TIME ZONE NOT NULL,
     scheduled_at TIMESTAMP WITH TIME ZONE NOT NULL,
     status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'confirmed', 'completed', 'cancelled', 'no_show')),
@@ -90,8 +87,8 @@ CREATE TABLE bookings (
 -- ============================================================================
 
 CREATE TABLE payments (
-    payment_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    booking_id UUID NOT NULL REFERENCES bookings(booking_id) ON DELETE CASCADE,
+    payment_id SERIAL PRIMARY KEY,
+    booking_id INTEGER NOT NULL REFERENCES bookings(booking_id) ON DELETE CASCADE,
     amount DECIMAL(10,2) NOT NULL,
     method VARCHAR(20) CHECK (method IN ('cash', 'card', 'online', 'insurance')),
     status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'completed', 'failed', 'refunded')),
@@ -109,7 +106,7 @@ CREATE TABLE payments (
 -- ============================================================================
 
 CREATE TABLE equipment (
-    equipment_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    equipment_id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     category VARCHAR(50) CHECK (category IN ('Diagnostic', 'Monitoring', 'Imaging', 'Emergency', 'Surgical')),
@@ -130,8 +127,8 @@ CREATE TABLE equipment (
 -- ============================================================================
 
 CREATE TABLE credentials (
-    credential_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    professional_id UUID NOT NULL REFERENCES healthcare_professionals(professional_id) ON DELETE CASCADE,
+    credential_id SERIAL PRIMARY KEY,
+    professional_id INTEGER NOT NULL REFERENCES healthcare_professionals(professional_id) ON DELETE CASCADE,
     type VARCHAR(50) NOT NULL CHECK (type IN ('license', 'certification', 'degree', 'membership')),
     number VARCHAR(100) NOT NULL,
     issued_on DATE NOT NULL,
@@ -139,7 +136,7 @@ CREATE TABLE credentials (
     issuer VARCHAR(255) NOT NULL,
     verification_status VARCHAR(20) DEFAULT 'pending' CHECK (verification_status IN ('pending', 'verified', 'rejected')),
     verified_at TIMESTAMP WITH TIME ZONE,
-    verified_by UUID REFERENCES users(user_id),
+    verified_by INTEGER REFERENCES users(user_id),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -149,10 +146,10 @@ CREATE TABLE credentials (
 -- ============================================================================
 
 CREATE TABLE reviews (
-    review_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
-    professional_id UUID NOT NULL REFERENCES healthcare_professionals(professional_id) ON DELETE CASCADE,
-    booking_id UUID REFERENCES bookings(booking_id) ON DELETE SET NULL,
+    review_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    professional_id INTEGER NOT NULL REFERENCES healthcare_professionals(professional_id) ON DELETE CASCADE,
+    booking_id INTEGER REFERENCES bookings(booking_id) ON DELETE SET NULL,
     rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
     comment TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -165,9 +162,9 @@ CREATE TABLE reviews (
 -- ============================================================================
 
 CREATE TABLE medical_records (
-    record_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
-    professional_id UUID NOT NULL REFERENCES healthcare_professionals(professional_id) ON DELETE CASCADE,
+    record_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    professional_id INTEGER NOT NULL REFERENCES healthcare_professionals(professional_id) ON DELETE CASCADE,
     diagnosis TEXT NOT NULL,
     treatment TEXT,
     symptoms TEXT[],
@@ -183,9 +180,9 @@ CREATE TABLE medical_records (
 -- ============================================================================
 
 CREATE TABLE prescriptions (
-    prescription_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
-    professional_id UUID NOT NULL REFERENCES healthcare_professionals(professional_id) ON DELETE CASCADE,
+    prescription_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    professional_id INTEGER NOT NULL REFERENCES healthcare_professionals(professional_id) ON DELETE CASCADE,
     medication VARCHAR(255) NOT NULL,
     dosage VARCHAR(100) NOT NULL,
     duration VARCHAR(100) NOT NULL,
@@ -203,13 +200,13 @@ CREATE TABLE prescriptions (
 -- ============================================================================
 
 CREATE TABLE lab_results (
-    result_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    result_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
     test_type VARCHAR(255) NOT NULL,
     result_value TEXT NOT NULL,
     reference_range VARCHAR(255),
     status VARCHAR(20) DEFAULT 'normal' CHECK (status IN ('normal', 'abnormal', 'critical')),
-    ordered_by UUID REFERENCES healthcare_professionals(professional_id),
+    ordered_by INTEGER REFERENCES healthcare_professionals(professional_id),
     ordered_at TIMESTAMP WITH TIME ZONE,
     collected_at TIMESTAMP WITH TIME ZONE,
     reported_at TIMESTAMP WITH TIME ZONE,
@@ -223,8 +220,8 @@ CREATE TABLE lab_results (
 -- ============================================================================
 
 CREATE TABLE insurance (
-    insurance_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    insurance_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
     provider VARCHAR(255) NOT NULL,
     policy_number VARCHAR(100) NOT NULL,
     coverage_type VARCHAR(50) CHECK (coverage_type IN ('individual', 'family', 'group')),
@@ -245,12 +242,12 @@ CREATE TABLE insurance (
 -- ============================================================================
 
 CREATE TABLE equipment_assignments (
-    assignment_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    professional_id UUID NOT NULL REFERENCES healthcare_professionals(professional_id) ON DELETE CASCADE,
-    equipment_id UUID NOT NULL REFERENCES equipment(equipment_id) ON DELETE CASCADE,
+    assignment_id SERIAL PRIMARY KEY,
+    professional_id INTEGER NOT NULL REFERENCES healthcare_professionals(professional_id) ON DELETE CASCADE,
+    equipment_id INTEGER NOT NULL REFERENCES equipment(equipment_id) ON DELETE CASCADE,
     assigned_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     purpose TEXT,
-    booking_id UUID REFERENCES bookings(booking_id) ON DELETE SET NULL,
+    booking_id INTEGER REFERENCES bookings(booking_id) ON DELETE SET NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -260,11 +257,11 @@ CREATE TABLE equipment_assignments (
 -- ============================================================================
 
 CREATE TABLE audit_logs (
-    log_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    log_id SERIAL PRIMARY KEY,
     table_name VARCHAR(100) NOT NULL,
-    record_id UUID NOT NULL,
+    record_id INTEGER NOT NULL,
     action VARCHAR(20) NOT NULL CHECK (action IN ('create', 'update', 'delete')),
-    user_id UUID REFERENCES users(user_id),
+    user_id INTEGER REFERENCES users(user_id),
     timestamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     ip_address INET,
     user_agent TEXT,

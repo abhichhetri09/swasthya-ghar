@@ -5,68 +5,27 @@
 export type RootStackParamList = {
   Home: undefined;
   Settings: undefined;
-  Dashboard: undefined;
-  Profile: undefined;
   SignIn: undefined;
   SignUp: undefined;
   Error: { errorType?: string; errorCode?: string; message?: string };
-  ErrorDemo: undefined;
-  Analytics: undefined;
-  Reports: undefined;
-  UserManagement: undefined;
-  PatientData: undefined;
-  SystemSettings: undefined;
-  Logs: undefined;
-  Notifications: undefined;
-  ContentManagement: undefined;
-  Billing: undefined;
-  Appointments: undefined;
-  HealthRecords: undefined;
-  Medications: undefined;
-  LabResults: undefined;
-  Prescriptions: undefined;
-  Telemedicine: undefined;
-  EmergencyContacts: undefined;
 };
 
 export type TabParamList = {
   HomeTab: undefined;
-  DashboardTab: undefined;
-  ProfileTab: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
   SettingsTab: undefined;
 };
 
 export const SCREENS = {
   HOME: 'Home',
-  SETTINGS: 'Settings',
-  DASHBOARD: 'Dashboard',
-  PROFILE: 'Profile',
   SIGN_IN: 'SignIn',
   SIGN_UP: 'SignUp',
   ERROR: 'Error',
-  ERROR_DEMO: 'ErrorDemo',
-  ANALYTICS: 'Analytics',
-  REPORTS: 'Reports',
-  USER_MANAGEMENT: 'UserManagement',
-  PATIENT_DATA: 'PatientData',
-  SYSTEM_SETTINGS: 'SystemSettings',
-  LOGS: 'Logs',
-  NOTIFICATIONS: 'Notifications',
-  CONTENT_MANAGEMENT: 'ContentManagement',
-  BILLING: 'Billing',
-  APPOINTMENTS: 'Appointments',
-  HEALTH_RECORDS: 'HealthRecords',
-  MEDICATIONS: 'Medications',
-  LAB_RESULTS: 'LabResults',
-  PRESCRIPTIONS: 'Prescriptions',
-  TELEMEDICINE: 'Telemedicine',
-  EMERGENCY_CONTACTS: 'EmergencyContacts',
 } as const;
 
 export const TABS = {
   HOME: 'HomeTab',
-  DASHBOARD: 'DashboardTab',
-  PROFILE: 'ProfileTab',
   SETTINGS: 'SettingsTab',
 } as const;
 

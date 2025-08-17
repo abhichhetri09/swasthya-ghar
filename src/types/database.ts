@@ -7,20 +7,20 @@
 // ============================================================================
 
 export interface User {
-  user_id: string; // UUID - Primary Key
+  user_id: number; // Integer - Primary Key
   full_name: string;
   phone: string;
   email: string;
-  address: string;
+  address: string;  
   emergency_contact: string;
   created_at: Date;
   
   // Enhanced fields for healthcare
-  date_of_birth?: Date;
+  date_of_birth?: string;
   gender?: 'male' | 'female' | 'other' | 'prefer_not_to_say';
   blood_type?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
   emergency_contact_relationship?: string;
-  insurance_id?: string; // Foreign key to Insurance
+  insurance_id?: number; // Foreign key to Insurance
   medical_history?: string; // JSON string or reference to MedicalRecord
   allergies?: string[]; // Array of allergy strings
   current_medications?: string[]; // Array of medication strings
@@ -29,7 +29,7 @@ export interface User {
 }
 
 export interface HealthcareProfessional {
-  professional_id: string; // UUID - Primary Key
+  professional_id: number; // Integer - Primary Key
   full_name: string;
   phone: string;
   email: string;
@@ -51,7 +51,7 @@ export interface HealthcareProfessional {
 }
 
 export interface Service {
-  service_id: string; // UUID - Primary Key
+  service_id: number; // Integer - Primary Key
   name: string;
   description: string;
   base_price: number;
@@ -69,10 +69,10 @@ export interface Service {
 }
 
 export interface Booking {
-  booking_id: string; // UUID - Primary Key
-  user_id: string; // Foreign Key to User
-  professional_id: string; // Foreign Key to HealthcareProfessional
-  service_id: string; // Foreign Key to Service
+  booking_id: number; // Integer - Primary Key
+  user_id: number; // Foreign Key to User
+  professional_id: number; // Foreign Key to HealthcareProfessional
+  service_id: number; // Foreign Key to Service
   requested_at: Date;
   scheduled_at: Date;
   status: 'pending' | 'confirmed' | 'completed' | 'cancelled' | 'no_show';
@@ -92,8 +92,8 @@ export interface Booking {
 }
 
 export interface Payment {
-  payment_id: string; // UUID - Primary Key
-  booking_id: string; // Foreign Key to Booking
+  payment_id: number; // Integer - Primary Key
+  booking_id: number; // Foreign Key to Booking
   amount: number;
   method: 'cash' | 'card' | 'insurance' | 'online' | 'bank_transfer';
   status: 'pending' | 'completed' | 'failed' | 'refunded';
@@ -113,7 +113,7 @@ export interface Payment {
 }
 
 export interface Equipment {
-  equipment_id: string; // UUID - Primary Key
+  equipment_id: number; // Integer - Primary Key
   name: string;
   description: string;
   category: string;
@@ -134,9 +134,9 @@ export interface Equipment {
 }
 
 export interface EquipmentAssignment {
-  assignment_id: string; // UUID - Primary Key
-  professional_id: string; // Foreign Key to HealthcareProfessional
-  equipment_id: string; // Foreign Key to Equipment
+  assignment_id: number; // Integer - Primary Key
+  professional_id: number; // Foreign Key to HealthcareProfessional
+  equipment_id: number; // Foreign Key to Equipment
   assigned_at: Date;
   returned_at?: Date;
   condition_notes?: string;
@@ -144,14 +144,14 @@ export interface EquipmentAssignment {
   // Enhanced fields
   expected_return_date?: Date;
   purpose?: string;
-  booking_id?: string; // If assigned for specific booking
+  booking_id?: number; // If assigned for specific booking
   created_at?: Date;
   updated_at?: Date;
 }
 
 export interface Credential {
-  credential_id: string; // UUID - Primary Key
-  professional_id: string; // Foreign Key to HealthcareProfessional
+  credential_id: number; // Integer - Primary Key
+  professional_id: number; // Foreign Key to HealthcareProfessional
   type: 'license' | 'certification' | 'degree' | 'membership';
   number: string;
   issued_on: Date;
@@ -169,10 +169,10 @@ export interface Credential {
 }
 
 export interface Review {
-  review_id: string; // UUID - Primary Key
-  user_id: string; // Foreign Key to User
-  professional_id: string; // Foreign Key to HealthcareProfessional
-  booking_id: string; // Foreign Key to Booking
+  review_id: number; // Integer - Primary Key
+  user_id: number; // Foreign Key to User
+  professional_id: number; // Foreign Key to HealthcareProfessional
+  booking_id: number; // Foreign Key to Booking
   rating: number; // 1-5 stars
   comment?: string;
   created_at: Date;
@@ -192,9 +192,9 @@ export interface Review {
 // ============================================================================
 
 export interface MedicalRecord {
-  record_id: string; // UUID - Primary Key
-  user_id: string; // Foreign Key to User
-  professional_id: string; // Foreign Key to HealthcareProfessional
+  record_id: number; // Integer - Primary Key
+  user_id: number; // Foreign Key to User
+  professional_id: number; // Foreign Key to HealthcareProfessional
   diagnosis: string;
   treatment: string;
   created_at: Date;
@@ -217,9 +217,9 @@ export interface MedicalRecord {
 }
 
 export interface Prescription {
-  prescription_id: string; // UUID - Primary Key
-  user_id: string; // Foreign Key to User
-  professional_id: string; // Foreign Key to HealthcareProfessional
+    prescription_id: number; // Integer - Primary Key
+  user_id: number; // Foreign Key to User
+  professional_id: number; // Foreign Key to HealthcareProfessional
   medication: string;
   dosage: string;
   duration: string;
@@ -241,8 +241,8 @@ export interface Prescription {
 }
 
 export interface LabResult {
-  result_id: string; // UUID - Primary Key
-  user_id: string; // Foreign Key to User
+  result_id: number; // Integer - Primary Key
+  user_id: number; // Foreign Key to User
   test_type: string;
   result_value: string;
   reference_range?: string;
@@ -262,8 +262,8 @@ export interface LabResult {
 }
 
 export interface Insurance {
-  insurance_id: string; // UUID - Primary Key
-  user_id: string; // Foreign Key to User
+  insurance_id: number; // Integer - Primary Key
+  user_id: number; // Foreign Key to User
   provider: string;
   policy_number: string;
   coverage_type: 'individual' | 'family' | 'group';
@@ -288,11 +288,11 @@ export interface Insurance {
 }
 
 export interface AuditLog {
-  log_id: string; // UUID - Primary Key
+  log_id: number; // Integer - Primary Key
   table_name: string;
-  record_id: string;
+  record_id: number;
   action: 'create' | 'update' | 'delete' | 'view';
-  user_id: string; // User who performed the action
+  user_id: number; // User who performed the action
   timestamp: Date;
   changes?: string; // JSON string of changes made
   
@@ -365,9 +365,9 @@ export interface InsuranceContact {
 // ============================================================================
 
 export interface BookingQuery {
-  user_id?: string;
-  professional_id?: string;
-  service_id?: string;
+  user_id?: number;
+  professional_id?: number;
+  service_id?: number;
   status?: BookingStatus;
   start_date?: Date;
   end_date?: Date;
@@ -376,7 +376,7 @@ export interface BookingQuery {
 }
 
 export interface PaymentQuery {
-  booking_id?: string;
+  booking_id?: number;
   status?: PaymentStatus;
   method?: PaymentMethod;
   start_date?: Date;
@@ -388,9 +388,9 @@ export interface PaymentQuery {
 }
 
 export interface ReviewQuery {
-  user_id?: string;
-  professional_id?: string;
-  booking_id?: string;
+        user_id?: number;
+  professional_id?: number;
+  booking_id?: number;
   min_rating?: number;
   max_rating?: number;
   start_date?: Date;

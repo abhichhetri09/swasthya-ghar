@@ -1,6 +1,6 @@
 -- ============================================================================
 -- AAROGYACARE HEALTHCARE DATABASE MIGRATION
--- Initial Schema Rollback (DOWN Migration)
+-- Initial Schema Rollback (DOWN Migration) - Using Integer IDs for Development
 -- ============================================================================
 
 -- ============================================================================
@@ -47,12 +47,6 @@ DROP TABLE IF EXISTS equipment CASCADE;
 DROP TABLE IF EXISTS services CASCADE;
 DROP TABLE IF EXISTS healthcare_professionals CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
-
--- ============================================================================
--- DROP EXTENSIONS
--- ============================================================================
-
-DROP EXTENSION IF EXISTS "uuid-ossp";
 
 -- ============================================================================
 -- MIGRATION ROLLBACK COMPLETE
