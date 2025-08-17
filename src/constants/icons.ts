@@ -98,7 +98,10 @@ export const UI_ICONS = {
   user: '👤',
   'wifi-off': '📶',
   server: '🖥️',
-} as const;
+  trash: '🗑️',
+  file: '📄',
+ 
+} as const; 
 
 // Status Icons
 export const STATUS_ICONS = {

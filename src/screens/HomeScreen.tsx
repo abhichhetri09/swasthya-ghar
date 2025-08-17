@@ -3,20 +3,31 @@ import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../contexts/ThemeContext';
 import { Colors } from '../constants/colors';
+import { useTranslation } from '../hooks/useTranslation';
+import { Button } from '../components/Button';
+import { navigationService } from '../services/navigation';
 
 export const HomeScreen: React.FC = () => {
   const { isDark } = useTheme();
-
+  const { t } = useTranslation();
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: isDark ? Colors.background.dark : Colors.background.light }]}>
       {/* Header */}
       <View style={styles.header}>
         <Text style={[styles.title, { color: isDark ? Colors.text.dark.primary : Colors.text.light.primary }]}>
-          User Management
+         {t('welcome')}
         </Text>
         <Text style={[styles.subtitle, { color: isDark ? Colors.text.dark.secondary : Colors.text.light.secondary }]}>
-          Manage your healthcare users
+          {t('appDescription')}
         </Text>
+        <View style={{ marginTop: 20 }}>
+          <Button 
+            title="View Button Demo" 
+            onPress={() => navigationService.navigate('Test')} 
+            variant="primary"
+            size="large"
+          />
+        </View>
       </View>
 
      

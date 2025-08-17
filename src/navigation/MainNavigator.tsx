@@ -14,6 +14,7 @@ import { BottomTabNavigator } from './BottomTabNavigator';
 
 // Import screens
 import { ErrorScreen } from '../screens/ErrorScreen';
+import { ButtonDemo } from '../components/ButtonDemo';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -50,6 +51,11 @@ export const MainNavigator: React.FC = () => {
           name={SCREENS.ERROR} 
           component={ErrorScreen}
           options={{ title: t('error.title') }}
+        />
+        <Stack.Screen 
+          name={SCREENS.TEST} 
+          component={ButtonDemo}
+          options={{ title: t('test') }}
         />
       </Stack.Navigator>
     </NavigationContainer>

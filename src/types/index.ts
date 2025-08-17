@@ -7,6 +7,7 @@ export type RootStackParamList = {
   Settings: undefined;
   SignIn: undefined;
   SignUp: undefined;
+  Test: undefined;
   Error: { errorType?: string; errorCode?: string; message?: string };
 };
 
@@ -21,6 +22,7 @@ export const SCREENS = {
   HOME: 'Home',
   SIGN_IN: 'SignIn',
   SIGN_UP: 'SignUp',
+  TEST: 'Test',
   ERROR: 'Error',
 } as const;
 

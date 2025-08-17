@@ -18,7 +18,7 @@ const SettingItem: React.FC<SettingItemProps> = ({ title, subtitle, children }) 
   const { isDark } = useTheme();
   
   return (
-    <View className={`p-4 rounded-2xl mb-4 ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-sm`}>
+    <View className={`p-4 rounded-2xl mb-4  ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-sm`}>
       <View className="flex-row items-center justify-between">
         <View className="flex-1 mr-4">
           <Text className={`text-lg font-semibold mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
@@ -40,7 +40,7 @@ export const SettingsScreen: React.FC = () => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView className={`flex-1 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <SafeAreaView className={`flex-1 `}>
       <ScrollView className="flex-1 px-4 pt-4">
         {/* Header with Back Button */}
         <View className="flex-row justify-between items-center mb-6">

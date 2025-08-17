@@ -43,69 +43,6 @@ class NavigationService {
   // Note: Tab navigation (Home, Dashboard, Profile, Settings) is handled by the tab navigator
   // These methods are for stack navigation to detailed screens only
 
-  goToAnalytics() {
-    this.navigate(SCREENS.ANALYTICS);
-  }
-
-  goToUserManagement() {
-    this.navigate(SCREENS.USER_MANAGEMENT);
-  }
-
-  goToPatientData() {
-    this.navigate(SCREENS.PATIENT_DATA);
-  }
-
-  goToSystemSettings() {
-    this.navigate(SCREENS.SYSTEM_SETTINGS);
-  }
-
-  goToNotifications() {
-    this.navigate(SCREENS.NOTIFICATIONS);
-  }
-
-  goToReports() {
-    this.navigate(SCREENS.REPORTS);
-  }
-
-  goToBilling() {
-    this.navigate(SCREENS.BILLING);
-  }
-
-  goToLogs() {
-    this.navigate(SCREENS.LOGS);
-  }
-
-  goToContentManagement() {
-    this.navigate(SCREENS.CONTENT_MANAGEMENT);
-  }
-
-  goToAppointments() {
-    this.navigate(SCREENS.APPOINTMENTS);
-  }
-
-  goToHealthRecords() {
-    this.navigate(SCREENS.HEALTH_RECORDS);
-  }
-
-  goToMedications() {
-    this.navigate(SCREENS.MEDICATIONS);
-  }
-
-  goToLabResults() {
-    this.navigate(SCREENS.LAB_RESULTS);
-  }
-
-  goToPrescriptions() {
-    this.navigate(SCREENS.PRESCRIPTIONS);
-  }
-
-  goToTelemedicine() {
-    this.navigate(SCREENS.TELEMEDICINE);
-  }
-
-  goToEmergencyContacts() {
-    this.navigate(SCREENS.EMERGENCY_CONTACTS);
-  }
 
   goToSignIn() {
     this.navigate(SCREENS.SIGN_IN);
@@ -119,8 +56,8 @@ class NavigationService {
     this.navigate(SCREENS.ERROR, { errorType, errorCode, message });
   }
 
-  goToErrorDemo() {
-    this.navigate(SCREENS.ERROR_DEMO);
+  goToTest() {
+    this.navigate(SCREENS.TEST);
   }
 }
 

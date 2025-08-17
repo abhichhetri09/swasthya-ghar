@@ -16,16 +16,22 @@ import { PlaceholderScreen } from '../components/PlaceholderScreen';
 import { SignInScreen } from '../screens/SignInScreen';
 import { SignUpScreen } from '../screens/SignUpScreen';
 import { ErrorScreen } from '../screens/ErrorScreen';
+import { ButtonDemo } from '../components/ButtonDemo';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export const AppNavigator: React.FC = () => {
   const { isDark } = useTheme();
+  const navigationRef = useRef<any>(null);
 
- 
+  React.useEffect(() => {
+    if (navigationRef.current) {
+      navigationService.setNavigator(navigationRef.current);
+    } 
+  }, []);
 
   return (
-    <>
+    <NavigationContainer ref={navigationRef}>
       <StatusBar style={isDark ? 'light' : 'dark'} />
       <Stack.Navigator
         initialRouteName={SCREENS.HOME}
@@ -60,10 +66,15 @@ export const AppNavigator: React.FC = () => {
           component={ErrorScreen}
           options={{ title: 'Error' }}
         />
-
-        {/* Error Demo Screen */}
+    
+        {/* Test Screen - Button Demo */}
+        <Stack.Screen 
+          name={SCREENS.TEST} 
+          component={ButtonDemo}
+          options={{ title: 'Button Demo' }}
+        />
       
       </Stack.Navigator>
-    </>
+    </NavigationContainer>
   );
 };
