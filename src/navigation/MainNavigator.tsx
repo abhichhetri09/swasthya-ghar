@@ -1,13 +1,15 @@
-import React, { useRef } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+/**
+ * Main Navigator
+ * 
+ * Handles the main app navigation for authenticated users
+ */
+
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from '../contexts/ThemeContext';
 import { Colors } from '../constants/colors';
-import { navigationService } from '../services/navigation';
-import type { RootStackParamList } from '../types';
 import { SCREENS } from '../types';
-import { useTranslation } from '../hooks/useTranslation';
 
 // Import navigators
 import { BottomTabNavigator } from './BottomTabNavigator';
@@ -15,22 +17,15 @@ import { BottomTabNavigator } from './BottomTabNavigator';
 // Import screens
 import { ErrorScreen } from '../screens/ErrorScreen';
 import { ButtonDemo } from '../components/ButtonDemo';
+import UserManagementScreen from '../screens/UserManagementScreen';
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator();
 
-export const MainNavigator: React.FC = () => {
+const MainNavigator: React.FC = () => {
   const { isDark } = useTheme();
-  const { t } = useTranslation();
-  const navigationRef = useRef<any>(null);  
-
-  React.useEffect(() => {
-    if (navigationRef.current) {
-      navigationService.setNavigator(navigationRef.current);
-    }
-  }, []);
 
   return (
-    <NavigationContainer ref={navigationRef}>
+    <>
       <StatusBar style={isDark ? 'light' : 'dark'} />
       <Stack.Navigator
         initialRouteName={SCREENS.HOME}
@@ -50,15 +45,26 @@ export const MainNavigator: React.FC = () => {
         <Stack.Screen 
           name={SCREENS.ERROR} 
           component={ErrorScreen}
-          options={{ title: t('error.title') }}
+          options={{ title: 'Error' }}
         />
+    
+        {/* Test Screen - Button Demo */}
         <Stack.Screen 
           name={SCREENS.TEST} 
           component={ButtonDemo}
-          options={{ title: t('test') }}
+          options={{ title: 'Button Demo' }}
+        />
+
+        {/* Admin Screens */}
+        <Stack.Screen 
+          name={SCREENS.USER_MANAGEMENT} 
+          component={UserManagementScreen}
+          options={{ title: 'User Management' }}
         />
 
       </Stack.Navigator>
-    </NavigationContainer>
+    </>
   );
 };
+
+export default MainNavigator;

@@ -7,14 +7,11 @@
   "languageToggle": "Vaihda Kieltä",
   "currentTheme": "Nykyinen Teema",
   "currentLanguage": "Nykyinen Kieli",
-  "light": "Vaalea",
-  "dark": "Tumma",
   "english": "Englanti",
   "finnish": "Suomi",
   "nepali": "Nepali",
   "notLoggedIn": "Ei Kirjautunut",
   "selectRole": "Valitse rooli jatkaaksesi",
-  "currentStatus": "Nykyinen Tila",
   "roleBasedContent": "Roolipohjainen Sisältö",
   "quickSettings": "Pika-asetukset",
   
@@ -71,7 +68,6 @@
   "accountType": "Tilityyppi",
   "noUserLoggedIn": "Ei Käyttäjää Kirjautunut",
   "noUserMessage": "Käytä roolin valitsijaa Koti-välilehdellä kirjautuaksesi sisään.",
-  "logout": "Kirjaudu ulos",
   
   "roleSelector": "Roolin Valitsija (Testaus)",
   "currentUser": "Nykyinen Käyttäjä: {name} ({role})",
@@ -99,7 +95,17 @@
       "current": "Nykyinen Kieli"
     },
     "currentStatus": "Nykyinen Tila",
+    "userInfo": "Käyttäjätiedot",
+    "userName": "Nimi",
+    "userEmail": "Sähköposti",
+    "userRole": "Rooli",
     "info": "Asetuksesi tallennetaan automaattisesti ja muistetaan kun avaat sovelluksen uudelleen."
+  },
+  
+  "logout": {
+    "confirmTitle": "Vahvista uloskirjautuminen",
+    "confirmMessage": "Haluatko varmasti kirjautua ulos?",
+    "title": "Kirjaudu ulos"
   },
   
   "home": "Koti",
@@ -124,6 +130,7 @@
   "error": "Virhe",
   "success": "Onnistui",
   "warning": "Varoitus",
+  "info": "Tietoja",
   
   "signIn": "Kirjaudu sisään",
   "signUp": "Rekisteröidy",

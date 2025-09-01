@@ -12,6 +12,7 @@ CREATE TABLE users (
     full_name VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
+    role VARCHAR(50) DEFAULT 'patient' CHECK (role IN ('patient', 'healthcare_professional', 'administrator', 'developer')),
     address TEXT,
     emergency_contact VARCHAR(255),
     date_of_birth DATE,
@@ -36,6 +37,7 @@ CREATE TABLE healthcare_professionals (
     phone VARCHAR(20) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     role VARCHAR(50) NOT NULL CHECK (role IN ('doctor', 'nurse', 'specialist', 'therapist', 'technician')),
+    user_role VARCHAR(50) DEFAULT 'healthcare_professional' CHECK (user_role IN ('patient', 'healthcare_professional', 'administrator', 'developer')),
     specialization VARCHAR(100),
     license_number VARCHAR(50) UNIQUE,
     status VARCHAR(20) DEFAULT 'active' CHECK (status IN ('active', 'inactive', 'suspended')),
@@ -275,12 +277,14 @@ CREATE TABLE audit_logs (
 -- Users indexes
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_users_phone ON users(phone);
+CREATE INDEX idx_users_role ON users(role);
 CREATE INDEX idx_users_insurance_id ON users(insurance_id);
 CREATE INDEX idx_users_is_active ON users(is_active);
 
 -- Healthcare professionals indexes
 CREATE INDEX idx_professionals_email ON healthcare_professionals(email);
 CREATE INDEX idx_professionals_role ON healthcare_professionals(role);
+CREATE INDEX idx_professionals_user_role ON healthcare_professionals(user_role);
 CREATE INDEX idx_professionals_status ON healthcare_professionals(status);
 CREATE INDEX idx_professionals_department ON healthcare_professionals(department);
 CREATE INDEX idx_professionals_license ON healthcare_professionals(license_number);
@@ -396,7 +400,9 @@ CREATE TRIGGER update_equipment_assignments_updated_at BEFORE UPDATE ON equipmen
 -- ============================================================================
 
 COMMENT ON TABLE users IS 'Patient/user information and demographics';
+COMMENT ON COLUMN users.role IS 'User role: patient, healthcare_professional, administrator, or developer';
 COMMENT ON TABLE healthcare_professionals IS 'Healthcare providers and their credentials';
+COMMENT ON COLUMN healthcare_professionals.user_role IS 'User role for healthcare professionals and developers';
 COMMENT ON TABLE services IS 'Available healthcare services and pricing';
 COMMENT ON TABLE bookings IS 'Appointment bookings and scheduling';
 COMMENT ON TABLE payments IS 'Payment transactions and billing';

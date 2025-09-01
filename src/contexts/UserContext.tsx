@@ -2,12 +2,13 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { UserContextType, User, UserRole, RolePermissions } from '../types';
 import { getRoleConfig } from '../types/roles';
+import { buildApiUrl, API_CONFIG } from '../config/api';
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [currentRole, setCurrentRole] = useState<UserRole>('user');
+  const [currentRole, setCurrentRole] = useState<UserRole>('patient');
 
   useEffect(() => {
     loadUser();
@@ -20,14 +21,14 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const parsedUser = JSON.parse(savedUser);
         
         // Check if the user's role still exists in the current configuration
-        const validRoles = ['admin', 'doctor', 'nurse', 'user'] as const;
+        const validRoles: UserRole[] = ['patient', 'healthcare_professional', 'administrator', 'developer'];
         if (!validRoles.includes(parsedUser.role)) {
-          console.warn(`User role '${parsedUser.role}' no longer exists, resetting to 'user'`);
+          console.warn(`User role '${parsedUser.role}' no longer exists, resetting to 'patient'`);
           // Reset to default user role
-          const resetUser = { ...parsedUser, role: 'user' as const };
+          const resetUser = { ...parsedUser, role: 'patient' as UserRole };
           await AsyncStorage.setItem('user', JSON.stringify(resetUser));
           setUser(resetUser);
-          setCurrentRole('user');
+          setCurrentRole('patient');
         } else {
           setUser(parsedUser);
           setCurrentRole(parsedUser.role);
@@ -37,7 +38,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.error('Error loading user:', error);
     }
   };
-
+      
   const login = async (newUser: User) => {
     try {
       await AsyncStorage.setItem('user', JSON.stringify(newUser));
@@ -50,9 +51,24 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async () => {
     try {
+      // Call backend logout API
+      try {
+        const logoutUrl = buildApiUrl(API_CONFIG.ENDPOINTS.AUTH.LOGOUT);
+        await fetch(logoutUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      } catch (error) {
+        console.warn('Backend logout failed:', error);
+        // Continue with local logout even if backend fails
+      }
+
+      // Clear local storage
       await AsyncStorage.removeItem('user');
       setUser(null);
-      setCurrentRole('user');
+      setCurrentRole('patient');
     } catch (error) {
       console.error('Error removing user:', error);
     }

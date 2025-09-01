@@ -100,7 +100,8 @@ export const UI_ICONS = {
   server: '🖥️',
   trash: '🗑️',
   file: '📄',
- 
+  plus: '➕',
+  users: '👥',
 } as const; 
 
 // Status Icons

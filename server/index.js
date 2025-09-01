@@ -9,9 +9,11 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const compression = require('compression');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 // Import routes
+const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const professionalRoutes = require('./routes/professionals');
 const bookingRoutes = require('./routes/bookings');
@@ -41,6 +43,7 @@ app.use(cors({
 
 // Request parsing middleware
 app.use(compression());
+app.use(cookieParser());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
@@ -62,6 +65,7 @@ app.get('/health', (req, res) => {
 });
 
 // API routes
+app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/professionals', professionalRoutes);
 app.use('/api/bookings', bookingRoutes);
@@ -96,6 +100,7 @@ app.listen(PORT, () => {
   console.log(`📊 Health check: http://localhost:${PORT}/health`);
   console.log(`🔗 API base: http://localhost:${PORT}/api`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔄 Nodemon is watching for changes...`);
 });
 
 // Graceful shutdown

@@ -3,6 +3,8 @@
 // ============================================================================
 
 export type RootStackParamList = {
+  Auth: undefined;
+  Main: undefined;
   Home: undefined;
   Settings: undefined;
   SignIn: undefined;
@@ -11,6 +13,7 @@ export type RootStackParamList = {
   TextInputDemo: undefined;
   SelectDemo: undefined;
   DatePickerDemo: undefined;
+  UserManagement: undefined;
   Error: { errorType?: string; errorCode?: string; message?: string };
 };
 
@@ -22,6 +25,8 @@ export type TabParamList = {
 };
     
 export const SCREENS = {
+  AUTH: 'Auth',
+  MAIN: 'Main',
   HOME: 'Home',
   SIGN_IN: 'SignIn',
   SIGN_UP: 'SignUp',
@@ -29,6 +34,7 @@ export const SCREENS = {
   TEXT_INPUT_DEMO: 'TextInputDemo',
   SELECT_DEMO: 'SelectDemo',
   DATE_PICKER_DEMO: 'DatePickerDemo',
+  USER_MANAGEMENT: 'UserManagement',
   ERROR: 'Error',
 } as const;
 
@@ -41,7 +47,7 @@ export const TABS = {
 // USER & ROLE TYPES
 // ============================================================================
 
-export type UserRole = 'admin' | 'doctor' | 'nurse' | 'user' ;
+export type UserRole = 'patient' | 'healthcare_professional' | 'administrator' | 'developer';
 
 export interface User {
   id: string;
@@ -81,16 +87,66 @@ export interface RolePermissions {
 
 // Role configurations - can be modified here without editing other files
 export const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
-  admin: {
-    role: 'admin',
+  patient: {
+    role: 'patient',
+    displayName: 'Patient',
+    description: 'End users seeking healthcare services',
+    icon: 'user',
+    color: '#6b7280', // Neutral gray
+    permissions: {
+      canViewAnalytics: false,
+      canManageUsers: false,
+      canAccessPatientData: false, // Can only access own data
+      canManageSystem: false,
+      canViewNotifications: true,
+      canViewReports: false,
+      canManageBilling: false,
+      canViewLogs: false,
+      canManageContent: false,
+      canManageAppointments: true, // Can book appointments
+      canAccessHealthRecords: true, // Can view own records
+      canManageMedications: false,
+      canViewLabResults: true, // Can view own lab results
+      canManagePrescriptions: false,
+      canAccessTelemedicine: true,
+      canManageEmergencyContacts: false,
+    },
+  },
+  healthcare_professional: {
+    role: 'healthcare_professional',
+    displayName: 'Healthcare Professional',
+    description: 'Doctors, nurses, specialists, therapists',
+    icon: 'doctor',
+    color: '#22c55e', // Success green
+    permissions: {
+      canViewAnalytics: true,
+      canManageUsers: false,
+      canAccessPatientData: true, // Can access assigned patient data
+      canManageSystem: false,
+      canViewNotifications: true,
+      canViewReports: true,
+      canManageBilling: false,
+      canViewLogs: false,
+      canManageContent: false,
+      canManageAppointments: true, // Can manage their schedule
+      canAccessHealthRecords: true, // Can view patient records
+      canManageMedications: true,
+      canViewLabResults: true,
+      canManagePrescriptions: true,
+      canAccessTelemedicine: true,
+      canManageEmergencyContacts: false,
+    },
+  },
+  administrator: {
+    role: 'administrator',
     displayName: 'Administrator',
-    description: 'Full system access and management capabilities',
+    description: 'System managers and facility admins',
     icon: 'admin',
     color: '#007C91', // Cerulean
     permissions: {
       canViewAnalytics: true,
       canManageUsers: true,
-      canAccessPatientData: true,
+      canAccessPatientData: true, // Can access all patient data
       canManageSystem: true,
       canViewNotifications: true,
       canViewReports: true,
@@ -106,92 +162,38 @@ export const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
       canManageEmergencyContacts: true,
     },
   },
-  doctor: {
-    role: 'doctor',
-    displayName: 'Doctor',
-    description: 'Medical professional with patient care access',
-    icon: 'doctor',
-    color: '#22c55e', // Success green
+  developer: {
+    role: 'developer',
+    displayName: 'Developer',
+    description: 'System developers with full access for testing and debugging',
+    icon: 'code',
+    color: '#8B5CF6', // Purple
     permissions: {
       canViewAnalytics: true,
-      canManageUsers: false,
-      canAccessPatientData: true,
-      canManageSystem: false,
+      canManageUsers: true,
+      canAccessPatientData: true, // Full access for testing
+      canManageSystem: true,
       canViewNotifications: true,
       canViewReports: true,
-      canManageBilling: false,
-      canViewLogs: false,
-      canManageContent: false,
+      canManageBilling: true,
+      canViewLogs: true,
+      canManageContent: true,
       canManageAppointments: true,
       canAccessHealthRecords: true,
       canManageMedications: true,
       canViewLabResults: true,
       canManagePrescriptions: true,
       canAccessTelemedicine: true,
-      canManageEmergencyContacts: false,
-    },
-  },
-  nurse: {
-    role: 'nurse',
-    displayName: 'Nurse',
-    description: 'Healthcare provider with patient support access',
-    icon: 'nurse',
-    color: '#3b82f6', // Blue
-    permissions: {
-      canViewAnalytics: false,
-      canManageUsers: false,
-      canAccessPatientData: true,
-      canManageSystem: false,
-      canViewNotifications: true,
-      canViewReports: false,
-      canManageBilling: false,
-      canViewLogs: false,
-      canManageContent: false,
-      canManageAppointments: true,
-      canAccessHealthRecords: true,
-      canManageMedications: true,
-      canViewLabResults: true,
-      canManagePrescriptions: false,
-      canAccessTelemedicine: true,
       canManageEmergencyContacts: true,
     },
   },
- 
-  
-  user: {
-    role: 'user',
-    displayName: 'User',
-    description: 'Basic user with limited access',
-    icon: 'user',
-    color: '#6b7280', // Neutral gray
-    permissions: {
-      canViewAnalytics: true,
-      canManageUsers: false,
-      canAccessPatientData: false,
-      canManageSystem: false,
-      canViewNotifications: false,
-      canViewReports: false,
-      canManageBilling: false,
-      canViewLogs: false,
-      canManageContent: false,
-      canManageAppointments: false,
-      canAccessHealthRecords: false,
-      canManageMedications: false,
-      canViewLabResults: false,
-      canManagePrescriptions: false,
-      canAccessTelemedicine: false,
-      canManageEmergencyContacts: false,
-    },
-  },
-
-  
 };
 
 // Helper functions for role management
 export const getRoleConfig = (role: UserRole): RoleConfig => {
   if (!ROLE_CONFIGS[role]) {
-    console.warn(`Role '${role}' not found in ROLE_CONFIGS, falling back to 'user' role`);
-    return ROLE_CONFIGS['user'];
+    console.warn(`Role '${role}' not found in ROLE_CONFIGS, falling back to 'patient' role`);
+    return ROLE_CONFIGS['patient'];
   }
   return ROLE_CONFIGS[role];
 };

@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../contexts/ThemeContext';
 import { useTranslation } from '../hooks/useTranslation';
 import { Icon } from '../components/Icon';
 import { navigationService } from '../services/navigation';
+import { ScreenWrapper } from '../components/ScreenWrapper';
 
 interface ErrorScreenProps {
   title?: string;
@@ -96,8 +96,8 @@ export const ErrorScreen: React.FC<ErrorScreenProps> = ({
   };
 
   return (
-    <SafeAreaView className={`flex-1 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
-      <ScrollView className="flex-1 px-6 pt-8">
+    <ScreenWrapper padding="large">
+      <ScrollView className="flex-1">
         {/* Error Header */}
         <View className="items-center mb-8">
           <Icon name={content.icon as any} size={64} className="mb-4" />
@@ -165,6 +165,6 @@ export const ErrorScreen: React.FC<ErrorScreenProps> = ({
           </Text>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 };

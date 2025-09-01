@@ -1,7 +1,7 @@
 /**
  * User Routes
  * 
- * API endpoints for user management
+ * Testing nodemon restart...
  */
 
 const express = require('express');
@@ -19,6 +19,7 @@ const validateUser = [
   body('date_of_birth').optional().isISO8601().withMessage('Must be a valid date'),
   body('gender').optional().isIn(['male', 'female', 'other']).withMessage('Gender must be male, female, or other'),
   body('address').optional().trim().isLength({ max: 1000 }).withMessage('Address must be less than 1000 characters'),
+  body('role').optional().isIn(['patient', 'healthcare_professional', 'administrator', 'developer']).withMessage('Role must be patient, healthcare_professional, administrator, or developer'),
   body('emergency_contact').optional().trim().isLength({ max: 255 }).withMessage('Emergency contact must be less than 255 characters'),
   body('emergency_contact_relationship').optional().trim().isLength({ max: 50 }).withMessage('Emergency contact relationship must be less than 50 characters'),
   body('blood_type').optional().isLength({ max: 5 }).withMessage('Blood type must be less than 5 characters'),
@@ -48,7 +49,7 @@ router.get('/', async (req, res, next) => {
     const offset = (page - 1) * limit;
 
     // Get total count
-    const countResult = await query('SELECT COUNT(*) FROM users');
+    const countResult = await query('SELECT COUNT(*) FROM users', []);    
     const total = parseInt(countResult.rows[0].count);
 
     // Get users with pagination
@@ -110,6 +111,7 @@ router.post('/', validateUser, handleValidationErrors, async (req, res, next) =>
       date_of_birth,
       gender,
       address,
+      role,
       emergency_contact,
       emergency_contact_relationship,
       blood_type,
@@ -124,13 +126,13 @@ router.post('/', validateUser, handleValidationErrors, async (req, res, next) =>
       `INSERT INTO users (
         full_name, email, phone, date_of_birth, gender, 
         address, emergency_contact, emergency_contact_relationship, blood_type,
-        allergies, current_medications, insurance_id, created_at, updated_at
+        allergies, current_medications, insurance_id, role, created_at, updated_at
       ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) 
       RETURNING *`,
       [
         full_name, email, phone, date_of_birth, gender,
         address, emergency_contact, emergency_contact_relationship, blood_type,
-        allergies, current_medications, insurance_id, now, now
+        allergies, current_medications, insurance_id, role, now, now
       ]
     );
 
@@ -163,6 +165,7 @@ router.put('/:id', validateUser, handleValidationErrors, async (req, res, next) 
       date_of_birth,
       gender,
       address,
+      role,
       emergency_contact,
       emergency_contact_relationship,
       blood_type,
@@ -233,7 +236,11 @@ router.put('/:id', validateUser, handleValidationErrors, async (req, res, next) 
       updateFields.push(`current_medications = $${paramCount++}`);
       updateValues.push(current_medications);
     }
-    if (insurance_id !== undefined) {
+    if (role !== undefined) {
+      updateFields.push(`role = $${paramCount++}`);
+      updateValues.push(role);
+    }
+        if (insurance_id !== undefined) {
       updateFields.push(`insurance_id = $${paramCount++}`);
       updateValues.push(insurance_id);
     }

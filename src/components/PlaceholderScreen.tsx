@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../contexts/ThemeContext';
 import { useNavigation } from '../hooks/useNavigation';
 import { useTranslation } from '../hooks/useTranslation';
 import type { PlaceholderScreenProps } from '../types';
 import { Icon } from './Icon';
 import { IconName } from '../constants/icons';
+import { ScreenWrapper } from './ScreenWrapper';
 
 export const PlaceholderScreen: React.FC<PlaceholderScreenProps> = ({
   title,
@@ -23,8 +23,8 @@ export const PlaceholderScreen: React.FC<PlaceholderScreenProps> = ({
   const defaultDescription = description || t('placeholderDescription');
 
   return (
-    <SafeAreaView className={`flex-1 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
-      <View className="flex-1 justify-center items-center px-6">
+    <ScreenWrapper padding="large">
+      <View className="flex-1 justify-center items-center">
         {/* Icon */}
         <Icon name={icon as IconName} size={80} className="mb-6" />
 
@@ -52,6 +52,6 @@ export const PlaceholderScreen: React.FC<PlaceholderScreenProps> = ({
           <Text className="text-white font-semibold text-lg">{t('goBack')}</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 };

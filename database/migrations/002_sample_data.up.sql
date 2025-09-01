@@ -37,17 +37,19 @@ INSERT INTO services (
 -- ============================================================================
 
 INSERT INTO users (
-    user_id, full_name, phone, email, address, emergency_contact,
+    user_id, full_name, phone, email, role, address, emergency_contact,
     date_of_birth, gender, blood_type, emergency_contact_relationship,
     allergies, current_medications, is_active
 ) VALUES 
-    (1, 'John Smith', '+1-555-0201', 'john.smith@email.com', '123 Main St, City, State 12345', 'Jane Smith', '1985-03-15', 'male', 'A+', 'Spouse', ARRAY['Penicillin', 'Peanuts'], ARRAY['Lisinopril 10mg', 'Metformin 500mg'], true),
-    (2, 'Maria Garcia', '+1-555-0202', 'maria.garcia@email.com', '456 Oak Ave, City, State 12345', 'Carlos Garcia', '1990-07-22', 'female', 'O+', 'Spouse', ARRAY['Sulfa drugs'], ARRAY['Vitamin D 1000IU'], true),
-    (3, 'David Kim', '+1-555-0203', 'david.kim@email.com', '789 Pine Rd, City, State 12345', 'Sarah Kim', '1978-11-08', 'male', 'B+', 'Spouse', ARRAY[]::text[], ARRAY['Atorvastatin 20mg'], true),
-    (4, 'Emma Thompson', '+1-555-0204', 'emma.thompson@email.com', '321 Elm St, City, State 12345', 'Robert Thompson', '1995-04-12', 'female', 'AB+', 'Parent', ARRAY['Latex'], ARRAY[]::text[], true),
-    (5, 'Ahmed Hassan', '+1-555-0205', 'ahmed.hassan@email.com', '654 Maple Dr, City, State 12345', 'Fatima Hassan', '1982-09-30', 'male', 'O-', 'Spouse', ARRAY['Shellfish'], ARRAY['Omeprazole 20mg'], true),
-    (6, 'Abhishek chhetri', '+1234567890', 'john.doe@example.com', '123 Main Street, City, State 12345', 'Jane Doe - +1987654321', '1989-12-31', 'male', 'O+', 'Spouse', ARRAY['Peanuts', 'Penicillin'], ARRAY['Aspirin', 'Vitamin D'], true),
-    (7, 'Sushma khanal', '985-557-8318', 'sushma.khanal@example.com', NULL, NULL, NULL, NULL, NULL, NULL, ARRAY[]::text[], ARRAY[]::text[], true);
+    (1, 'John Smith', '+1-555-0201', 'john.smith@email.com', 'patient', '123 Main St, City, State 12345', 'Jane Smith', '1985-03-15', 'male', 'A+', 'Spouse', ARRAY['Penicillin', 'Peanuts'], ARRAY['Lisinopril 10mg', 'Metformin 500mg'], true),
+    (2, 'Maria Garcia', '+1-555-0202', 'maria.garcia@email.com', 'patient', '456 Oak Ave, City, State 12345', 'Carlos Garcia', '1990-07-22', 'female', 'O+', 'Spouse', ARRAY['Sulfa drugs'], ARRAY['Vitamin D 1000IU'], true),
+    (3, 'David Kim', '+1-555-0203', 'david.kim@email.com', 'patient', '789 Pine Rd, City, State 12345', 'Sarah Kim', '1978-11-08', 'male', 'B+', 'Spouse', ARRAY[]::text[], ARRAY['Atorvastatin 20mg'], true),
+    (4, 'Emma Thompson', '+1-555-0204', 'emma.thompson@email.com', 'patient', '321 Elm St, City, State 12345', 'Robert Thompson', '1995-04-12', 'female', 'AB+', 'Parent', ARRAY['Latex'], ARRAY[]::text[], true),
+    (5, 'Ahmed Hassan', '+1-555-0205', 'ahmed.hassan@email.com', 'patient', '654 Maple Dr, City, State 12345', 'Fatima Hassan', '1982-09-30', 'male', 'O-', 'Spouse', ARRAY['Shellfish'], ARRAY['Omeprazole 20mg'], true),
+    (6, 'Abhishek chhetri', '+1234567890', 'john.doe@example.com', 'patient', '123 Main Street, City, State 12345', 'Jane Doe - +1987654321', '1989-12-31', 'male', 'O+', 'Spouse', ARRAY['Peanuts', 'Penicillin'], ARRAY['Aspirin', 'Vitamin D'], true),
+    (7, 'Sushma khanal', '985-557-8318', 'sushma.khanal@example.com', 'patient', NULL, NULL, NULL, NULL, NULL, NULL, ARRAY[]::text[], ARRAY[]::text[], true),
+    (8, 'Alex Developer', '+1-555-0206', 'alex.developer@aarogyacare.com', 'developer', '789 Tech Blvd, City, State 12345', 'Emergency Contact', '1990-01-01', 'male', 'A+', 'Colleague', ARRAY[]::text[], ARRAY[]::text[], true),
+    (9, 'Sarah Admin', '+1-555-0207', 'sarah.admin@aarogyacare.com', 'administrator', '456 Admin St, City, State 12345', 'Emergency Contact', '1985-06-15', 'female', 'O+', 'Colleague', ARRAY[]::text[], ARRAY[]::text[], true);
 
 -- ============================================================================
 -- SAMPLE EQUIPMENT

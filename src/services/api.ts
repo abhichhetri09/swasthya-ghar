@@ -27,7 +27,7 @@ const getBaseURL = () => {
   // For Expo development with tunnel
   // We need to use the computer's IP address since the tunnel doesn't handle localhost
   // The tunnel only handles the React Native app's connection to Metro bundler
-  return 'http://192.168.1.116:3000/api';
+  return 'http://192.168.1.151:3000/api';
 };
 
 // API Base Configuration

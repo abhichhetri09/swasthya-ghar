@@ -1,60 +1,48 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import { Colors } from '../constants/colors';
 import { useTranslation } from '../hooks/useTranslation';
 import { Button } from '../components/Button';
 import { navigationService } from '../services/navigation';
 import { SCREENS } from '../types';
-
+import { ScreenWrapper } from '../components/ScreenWrapper';
+import { ScreenWithHeader } from '../components/ScreenWithHeader';
 export const HomeScreen: React.FC = () => {
   const { isDark } = useTheme();
   const { t } = useTranslation();
+  
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: isDark ? Colors.background.dark : Colors.background.light }]}>
+    <ScreenWrapper
+      padding="large"
+      scrollable={false}
+      
+      header={<Text className={`text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{t('welcome')}</Text>}
+    >
+      
       {/* Header */}
-      <View style={styles.header}>
-        <Text style={[styles.title, { color: isDark ? Colors.text.dark.primary : Colors.text.light.primary }]}>
-         {t('welcome')}
-        </Text>
-        <Text style={[styles.subtitle, { color: isDark ? Colors.text.dark.secondary : Colors.text.light.secondary }]}>
+      <View className="mb-6">
+       
+        <Text className={`text-base ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
           {t('appDescription')}
         </Text>
-        <View style={{ marginTop: 20, gap: 12 }}>
+        <View className="mt-5 space-y-3">
           <Button 
             title="View Button Demo" 
             onPress={() => navigationService.navigate('Test')} 
             variant="primary"
             size="large"
           />
-     
+          <Button 
+            title="User Management" 
+            onPress={() => navigationService.navigate('UserManagement')} 
+            variant="secondary"
+            size="large"
+          />
         </View>
       </View>
-
-     
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    padding: 20,
-    paddingBottom: 10,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 4,
-  },
-  subtitle: {
-    fontSize: 16,
-    opacity: 0.8,
-  },
-  content: {
-    flex: 1,
-  },
-});
+

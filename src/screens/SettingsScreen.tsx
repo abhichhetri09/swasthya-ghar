@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, Alert } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
-import { useNavigation } from '../hooks/useNavigation';
+import { useUser } from '../contexts/UserContext';
 import { ThemeToggle } from '../components/ThemeToggle';
 import { LanguageToggle } from '../components/LanguageToggle';
-import { BackButton } from '../components/BackButton';
+import { Button } from '../components/Button';
+import { ScreenWithHeader } from '../components/ScreenWithHeader';
 import { useTranslation } from '../hooks/useTranslation';
 
 interface SettingItemProps {
@@ -36,26 +36,34 @@ const SettingItem: React.FC<SettingItemProps> = ({ title, subtitle, children }) 
 
 export const SettingsScreen: React.FC = () => {
   const { isDark } = useTheme();
+  const { user, logout } = useUser();
   const { t, language } = useTranslation();
-  const navigation = useNavigation();
+
+  const handleLogout = () => {
+    Alert.alert(
+      t('logout.confirmTitle'),
+      t('logout.confirmMessage'),
+      [
+        {
+          text: t('cancel'),
+          style: 'cancel',
+        },
+        {
+          text: t('logout.title'),
+          style: 'destructive',
+          onPress: logout,
+        },
+      ]
+    );
+  };
 
   return (
-    <SafeAreaView className={`flex-1 `}>
-      <ScrollView className="flex-1 px-4 pt-4">
-        {/* Header with Back Button */}
-        <View className="flex-row justify-between items-center mb-6">
-          <BackButton onPress={() => navigation.goBack()} title={t('back')} />
-        </View>
-
-        {/* Header */}
-        <View className="mb-6">
-          <Text className={`text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            {t('settings.title')}
-          </Text>
-          <Text className={`text-base ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            {t('settings.subtitle')}
-          </Text>
-        </View>
+    <ScreenWithHeader
+      title={t('settings.title')}
+      subtitle={t('settings.subtitle')}
+      scrollable={true}
+      padding="medium"
+    >
 
         {/* Theme Toggle */}
         <SettingItem
@@ -100,13 +108,57 @@ export const SettingsScreen: React.FC = () => {
           </View>
         </View>
 
+        {/* User Info */}
+        {user && (
+          <View className={`p-4 rounded-2xl mt-6 ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-sm`}>
+            <Text className={`text-lg font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              {t('settings.userInfo')}
+            </Text>
+            
+            <View className="space-y-2 mb-4">
+              <View className="flex-row justify-between items-center">
+                <Text className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  {t('settings.userName')}
+                </Text>
+                <Text className={`font-medium ${isDark ? 'text-primary-400' : 'text-primary-600'}`}>
+                  {user.name}
+                </Text>
+              </View>
+              
+              <View className="flex-row justify-between items-center">
+                <Text className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  {t('settings.userEmail')}
+                </Text>
+                <Text className={`font-medium ${isDark ? 'text-primary-400' : 'text-primary-600'}`}>
+                  {user.email}
+                </Text>
+              </View>
+              
+              <View className="flex-row justify-between items-center">
+                <Text className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  {t('settings.userRole')}
+                </Text>
+                <Text className={`font-medium ${isDark ? 'text-primary-400' : 'text-primary-600'}`}>
+                  {user.role}
+                </Text>
+              </View>
+            </View>
+
+            <Button
+              title={t('logout.title')}
+              onPress={handleLogout}
+              variant="danger"
+              size="medium"
+            />
+          </View>
+        )}
+
         {/* Info Card */}
         <View className={`p-4 rounded-2xl mt-6 ${isDark ? 'bg-primary-900/20' : 'bg-primary-50'}`}>
           <Text className={`text-center ${isDark ? 'text-primary-300' : 'text-primary-700'}`}>
             ✨ {t('settings.info')}
           </Text>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+    </ScreenWithHeader>
   );
 };

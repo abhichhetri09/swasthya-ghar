@@ -1,10 +1,10 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../contexts/ThemeContext';
 import { useTranslation } from '../hooks/useTranslation';
 import { Icon } from './Icon';
 import { navigationService } from '../services/navigation';
+import { ScreenWrapper } from './ScreenWrapper';
 
 interface Props {
   children: ReactNode;
@@ -66,8 +66,8 @@ class ErrorBoundaryClass extends Component<Props & { isDark: boolean; t: (key: s
       }
 
       return (
-        <SafeAreaView className={`flex-1 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
-          <ScrollView className="flex-1 px-6 pt-8">
+        <ScreenWrapper padding="large">
+          <ScrollView className="flex-1">
             {/* Error Header */}
             <View className="items-center mb-8">
               <Icon name="error" size={64} className="mb-4" />
@@ -133,7 +133,7 @@ class ErrorBoundaryClass extends Component<Props & { isDark: boolean; t: (key: s
               </View>
             </View>
           </ScrollView>
-        </SafeAreaView>
+        </ScreenWrapper>
       );
     }
 

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../contexts/ThemeContext';
 import { Colors } from '../constants/colors';
@@ -7,6 +7,7 @@ import { useUser } from '../contexts/UserContext';
 import { useTranslation } from '../hooks/useTranslation';
 import { Icon } from '../components/Icon';
 import { navigationService } from '../services/navigation';
+import { buildApiUrl, API_CONFIG } from '../config/api';
 
 export const SignInScreen: React.FC = () => {
   const { isDark } = useTheme();
@@ -17,6 +18,9 @@ export const SignInScreen: React.FC = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  
+  const emailInputRef = useRef<TextInput>(null);
+  const passwordInputRef = useRef<TextInput>(null);
 
   const handleSignIn = async () => {
     if (!email.trim() || !password.trim()) {
@@ -32,21 +36,45 @@ export const SignInScreen: React.FC = () => {
     setIsLoading(true);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Call the real authentication API
+      const loginUrl = buildApiUrl(API_CONFIG.ENDPOINTS.AUTH.LOGIN);
+      console.log('🔗 Making login request to:', loginUrl);
       
-      // For demo purposes, create a mock user based on email
-      const mockUser = {
-        id: '1',
-        name: email.split('@')[0],
-        email: email,
-        role: 'user' as const,
-      };
-      
-      await login(mockUser);
-      navigationService.navigate('Home');
+      const response = await fetch(loginUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email.trim(),
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Login failed');
+      }
+
+      if (data.success) {
+        // Create user object for the app
+        const user = {
+          id: data.user.user_id.toString(),
+          name: data.user.full_name,
+          email: data.user.email,
+          role: data.user.role,
+        };
+        
+        await login(user);
+        // Navigate to main app
+        navigationService.navigate('Main');
+      } else {
+        throw new Error(data.error || 'Login failed');
+      }
     } catch (error) {
-      Alert.alert(t('error'), t('signInFailed'));
+      console.error('Sign in error:', error);
+      Alert.alert(t('error'), error instanceof Error ? error.message : t('signInFailed'));
     } finally {
       setIsLoading(false);
     }
@@ -61,8 +89,19 @@ export const SignInScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView className={`flex-1 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
-      <ScrollView className="flex-1 px-6 pt-8">
+    <SafeAreaView className={`flex-1 ${isDark ? 'bg-gray-800' : 'bg-gray-50'}`}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView 
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          className="flex-1"
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+        >
+          <ScrollView 
+            className="flex-1 px-6 py-6"
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+            contentContainerStyle={{ flexGrow: 1 }}
+          >
         {/* Header */}
         <View className="items-center mb-8">
           <Icon name="home" size={64} className="mb-4" />
@@ -86,6 +125,7 @@ export const SignInScreen: React.FC = () => {
             }`}>
               <Icon name="email" size={20} className="mr-3" />
               <TextInput
+                ref={emailInputRef}
                 value={email}
                 onChangeText={setEmail}
                 placeholder={t('enterEmail')}
@@ -94,6 +134,9 @@ export const SignInScreen: React.FC = () => {
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
+                returnKeyType="next"
+                onSubmitEditing={() => passwordInputRef.current?.focus()}
+                blurOnSubmit={false}
               />
             </View>
           </View>
@@ -108,6 +151,7 @@ export const SignInScreen: React.FC = () => {
             }`}>
               <Icon name="lock" size={20} className="mr-3" />
               <TextInput
+                ref={passwordInputRef}
                 value={password}
                 onChangeText={setPassword}
                 placeholder={t('enterPassword')}
@@ -116,6 +160,9 @@ export const SignInScreen: React.FC = () => {
                 secureTextEntry={!showPassword}
                 autoCapitalize="none"
                 autoCorrect={false}
+                returnKeyType="done"
+                onSubmitEditing={handleSignIn}
+                blurOnSubmit={false}
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                 <Icon name={showPassword ? 'eye-off' : 'eye'} size={20} />
@@ -163,8 +210,10 @@ export const SignInScreen: React.FC = () => {
               </TouchableOpacity>
             </Text>
           </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+                 </View>
+         </ScrollView>
+       </KeyboardAvoidingView>
+       </TouchableWithoutFeedback>
+     </SafeAreaView>
+   );
+ };

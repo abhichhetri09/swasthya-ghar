@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../contexts/ThemeContext';
 import { Colors } from '../constants/colors';
 import { useUser } from '../contexts/UserContext';
 import { useTranslation } from '../hooks/useTranslation';
 import { Icon } from '../components/Icon';
+import { RoleSelector } from '../components/RoleSelector';
 import { navigationService } from '../services/navigation';
+import { buildApiUrl, API_CONFIG } from '../config/api';
 import type { UserRole } from '../types';
 
 export const SignUpScreen: React.FC = () => {
@@ -18,17 +20,15 @@ export const SignUpScreen: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [selectedRole, setSelectedRole] = useState<UserRole>('user');
+  const [selectedRole, setSelectedRole] = useState<UserRole>('patient');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const roles: { value: UserRole; label: string; icon: string }[] = [
-    { value: 'user', label: t('roleUser'), icon: 'user' },
-    { value: 'doctor', label: t('roleDoctor'), icon: 'doctor' },
-    { value: 'nurse', label: t('roleNurse'), icon: 'nurse' },
-    { value: 'admin', label: t('roleAdmin'), icon: 'admin' },
-  ];
+  
+  const nameInputRef = useRef<TextInput>(null);
+  const emailInputRef = useRef<TextInput>(null);
+  const passwordInputRef = useRef<TextInput>(null);
+  const confirmPasswordInputRef = useRef<TextInput>(null);
 
   const handleSignUp = async () => {
     // Validation
@@ -42,7 +42,7 @@ export const SignUpScreen: React.FC = () => {
       return;
     }
 
-    if (password.length < 6) {
+    if (password.length < 8) {
       Alert.alert(t('error'), t('passwordTooShort'));
       return;
     }
@@ -55,21 +55,48 @@ export const SignUpScreen: React.FC = () => {
     setIsLoading(true);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Call the real user creation API
+      const signupUrl = buildApiUrl(API_CONFIG.ENDPOINTS.USERS.CREATE);
+      console.log('🔗 Making signup request to:', signupUrl);
       
-      // Create mock user
-      const mockUser = {
-        id: Date.now().toString(),
-        name: name.trim(),
-        email: email.trim(),
-        role: selectedRole,
-      };
-      
-      await login(mockUser);
-      navigationService.navigate('Home');
+      const response = await fetch(signupUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          full_name: name.trim(),
+          email: email.trim(),
+          password: password,
+          role: selectedRole,
+          phone: '', // Optional field
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Registration failed');
+      }
+
+      if (data.success) {
+        // Create user object for the app
+        const user = {
+          id: data.user.user_id.toString(),
+          name: data.user.full_name,
+          email: data.user.email,
+          role: data.user.role,
+        };
+        
+        await login(user);
+        // Navigate to main app
+        navigationService.navigate('Main');
+      } else {
+        throw new Error(data.error || 'Registration failed');
+      }
     } catch (error) {
-      Alert.alert(t('error'), t('signUpFailed'));
+      console.error('Sign up error:', error);
+      Alert.alert(t('error'), error instanceof Error ? error.message : t('signUpFailed'));
     } finally {
       setIsLoading(false);
     }
@@ -80,8 +107,19 @@ export const SignUpScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView className={`flex-1 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
-      <ScrollView className="flex-1 px-6 pt-8">
+    <SafeAreaView className={`flex-1 ${isDark ? 'bg-gray-800' : 'bg-gray-50'}`}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView 
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          className="flex-1"
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+        >
+          <ScrollView 
+            className="flex-1 px-6 py-6"
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+            contentContainerStyle={{ flexGrow: 1 }}
+          >
         {/* Header */}
         <View className="items-center mb-8">
           <Icon name="add" size={64} className="mb-4" />
@@ -105,6 +143,7 @@ export const SignUpScreen: React.FC = () => {
             }`}>
               <Icon name="user" size={20} className="mr-3" />
               <TextInput
+                ref={nameInputRef}
                 value={name}
                 onChangeText={setName}
                 placeholder={t('enterFullName')}
@@ -112,6 +151,9 @@ export const SignUpScreen: React.FC = () => {
                 className={`flex-1 text-base ${isDark ? 'text-white' : 'text-gray-900'}`}
                 autoCapitalize="words"
                 autoCorrect={false}
+                returnKeyType="next"
+                onSubmitEditing={() => emailInputRef.current?.focus()}
+                blurOnSubmit={false}
               />
             </View>
           </View>
@@ -126,6 +168,7 @@ export const SignUpScreen: React.FC = () => {
             }`}>
               <Icon name="email" size={20} className="mr-3" />
               <TextInput
+                ref={emailInputRef}
                 value={email}
                 onChangeText={setEmail}
                 placeholder={t('enterEmail')}
@@ -134,6 +177,9 @@ export const SignUpScreen: React.FC = () => {
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
+                returnKeyType="next"
+                onSubmitEditing={() => passwordInputRef.current?.focus()}
+                blurOnSubmit={false}
               />
             </View>
           </View>
@@ -148,6 +194,7 @@ export const SignUpScreen: React.FC = () => {
             }`}>
               <Icon name="lock" size={20} className="mr-3" />
               <TextInput
+                ref={passwordInputRef}
                 value={password}
                 onChangeText={setPassword}
                 placeholder={t('enterPassword')}
@@ -156,6 +203,9 @@ export const SignUpScreen: React.FC = () => {
                 secureTextEntry={!showPassword}
                 autoCapitalize="none"
                 autoCorrect={false}
+                returnKeyType="next"
+                onSubmitEditing={() => confirmPasswordInputRef.current?.focus()}
+                blurOnSubmit={false}
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                 <Icon name={showPassword ? 'eye-off' : 'eye'} size={20} />
@@ -172,7 +222,8 @@ export const SignUpScreen: React.FC = () => {
               isDark ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-300'
             }`}>
               <Icon name="lock" size={20} className="mr-3" />
-              <TextInput
+                            <TextInput
+                ref={confirmPasswordInputRef}
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
                 placeholder={t('confirmPassword')}
@@ -181,6 +232,9 @@ export const SignUpScreen: React.FC = () => {
                 secureTextEntry={!showConfirmPassword}
                 autoCapitalize="none"
                 autoCorrect={false}
+                returnKeyType="done"
+                onSubmitEditing={handleSignUp}
+                blurOnSubmit={false}
               />
               <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
                 <Icon name={showConfirmPassword ? 'eye-off' : 'eye'} size={20} />
@@ -193,35 +247,11 @@ export const SignUpScreen: React.FC = () => {
             <Text className={`text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
               {t('selectRole')}
             </Text>
-            <View className="space-y-2">
-              {roles.map((role) => (
-                <TouchableOpacity
-                  key={role.value}
-                  onPress={() => setSelectedRole(role.value)}
-                  className={`flex-row items-center p-3 rounded-lg border ${
-                    selectedRole === role.value
-                      ? isDark
-                        ? 'bg-blue-900 border-blue-500'
-                        : 'bg-blue-50 border-blue-500'
-                      : isDark
-                        ? 'bg-gray-800 border-gray-600'
-                        : 'bg-white border-gray-300'
-                  }`}
-                >
-                  <Icon name={role.icon as any} size={24} className="mr-3" />
-                  <Text className={`flex-1 text-base ${
-                    selectedRole === role.value
-                      ? isDark ? 'text-blue-300' : 'text-blue-700'
-                      : isDark ? 'text-white' : 'text-gray-900'
-                  }`}>
-                    {role.label}
-                  </Text>
-                  {selectedRole === role.value && (
-                    <Icon name="check" size={20} className="text-blue-500" />
-                  )}
-                </TouchableOpacity>
-              ))}
-            </View>
+            <RoleSelector
+              selectedRole={selectedRole}
+              onRoleSelect={setSelectedRole}
+              disabled={isLoading}
+            />
           </View>
 
           {/* Sign Up Button */}
@@ -258,7 +288,9 @@ export const SignUpScreen: React.FC = () => {
             </Text>
           </View>
         </View>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 };

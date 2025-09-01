@@ -7,14 +7,11 @@
   "languageToggle": "Toggle Language",
   "currentTheme": "Current Theme",
   "currentLanguage": "Current Language",
-  "light": "Light",
-  "dark": "Dark",
   "english": "English",
   "finnish": "Finnish",
   "nepali": "Nepali",
   "notLoggedIn": "Not Logged In",
   "selectRole": "Select a role to continue",
-  "currentStatus": "Current Status",
   "roleBasedContent": "Role-Based Content",
   "quickSettings": "Quick Settings",
   
@@ -71,8 +68,7 @@
   "accountType": "Account Type",
   "noUserLoggedIn": "No User Logged In",
   "noUserMessage": "Please use the role selector on the Home tab to log in.",
-  "logout": "Logout",
-  
+    
   "roleSelector": "Role Selector (Testing)",
   "currentUser": "Current User: {name} ({role})",
   "noUserLoggedInShort": "No user logged in",
@@ -99,7 +95,16 @@
       "current": "Current Language"
     },
     "currentStatus": "Current Status",
+    "userInfo": "User Information",
+    "userName": "Name",
+    "userEmail": "Email",
+    "userRole": "Role",
     "info": "Your preferences are automatically saved and will be remembered when you reopen the app."
+  },
+  "logout": {
+    "confirmTitle": "Confirm Logout",
+    "confirmMessage": "Are you sure you want to logout?",
+    "title": "Logout"
   },
   
   "home": "Home",
@@ -124,6 +129,7 @@
   "error": "Error",
   "success": "Success",
   "warning": "Warning",
+  "info": "Information",
   
   "signIn": "Sign In",
   "signUp": "Sign Up",

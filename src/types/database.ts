@@ -14,6 +14,7 @@ export interface User {
   address: string;  
   emergency_contact: string;
   created_at: Date;
+  role: 'patient' | 'healthcare_professional' | 'administrator' | 'developer';
   
   // Enhanced fields for healthcare
   date_of_birth?: string;
@@ -33,7 +34,7 @@ export interface HealthcareProfessional {
   full_name: string;
   phone: string;
   email: string;
-  role: 'doctor' | 'nurse' | 'specialist' | 'therapist' | 'technician';
+  role: 'patient' | 'healthcare_professional' | 'administrator' | 'developer';
   specialization: string;
   license_number: string;
   status: 'active' | 'inactive' | 'suspended' | 'retired';
