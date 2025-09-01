@@ -70,18 +70,25 @@ A comprehensive React Native mobile application built with Expo for healthcare s
    npm install
    ```
 
-3. **Set up the database**
+3. **Set up the database (Automated)**
    ```bash
-   # Create PostgreSQL database
+   # This will automatically:
+   # - Create the database if it doesn't exist
+   # - Run all migrations
+   # - Set up sample data
+   npm run db:setup
+   ```
+
+4. **Alternative: Manual database setup**
+   ```bash
+   # Create PostgreSQL database manually
    createdb aarogyacare
    
    # Set up environment variables (create .env file)
    cp .env.example .env
    # Edit .env with your database credentials
-   ```
-
-4. **Run database migrations**
-   ```bash
+   
+   # Run database migrations
    npm run db:migrate:up
    ```
 
@@ -170,6 +177,7 @@ The application uses PostgreSQL for data persistence. The database includes comp
 
 | Script | Description |
 |--------|-------------|
+| `npm run db:setup` | **Automated database setup** (recommended for new developers) |
 | `npm run db:migrate` | Show migration help |
 | `npm run db:migrate:up` | Run all migrations (fresh start) |
 | `npm run db:migrate:down` | Rollback all migrations |
@@ -375,8 +383,7 @@ npm install @types/react @types/react-native
 3. Set up the development environment:
    ```bash
    npm install
-   createdb aarogyacare
-   npm run db:migrate:up
+   npm run db:setup  # Automated database setup
    ```
 4. Make your changes
 5. Test your changes:

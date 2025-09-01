@@ -11,11 +11,13 @@
     "dev:server": "start /B npm run server",
     "dev:expo": "npm start",
     "server": "cd server && npm start",
+    "db:setup": "node database/setup.js",
     "db:migrate": "node database/migrate.js",
     "db:migrate:up": "node database/migrate.js up",
     "db:migrate:down": "node database/migrate.js down",
     "db:migrate:status": "node database/migrate.js status",
-    "db:create-migration": "node database/create-migration.js"
+    "db:create-migration": "node database/create-migration.js",
+    "db:connect": "psql -h localhost -p 5432 -U postgres -d aarogyacare"
   },
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",

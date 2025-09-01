@@ -47,9 +47,11 @@ class MigrationGenerator {
 
 -- TODO: Add your UP migration SQL here
 -- Examples:
+--   BEGIN;
 --   ALTER TABLE users ADD COLUMN new_field VARCHAR(255);
 --   CREATE TABLE new_table (id UUID PRIMARY KEY DEFAULT uuid_generate_v4());
 --   CREATE INDEX idx_table_field ON table_name(field_name);
+--   COMMIT;
 
 -- ============================================================================
 -- MIGRATION COMPLETE
@@ -66,9 +68,11 @@ class MigrationGenerator {
 
 -- TODO: Add your DOWN migration SQL here (rollback logic)
 -- Examples:
+--   BEGIN;
 --   ALTER TABLE users DROP COLUMN IF EXISTS new_field;
 --   DROP TABLE IF EXISTS new_table CASCADE;
 --   DROP INDEX IF EXISTS idx_table_field;
+--   COMMIT;
 
 -- ============================================================================
 -- MIGRATION ROLLBACK COMPLETE
